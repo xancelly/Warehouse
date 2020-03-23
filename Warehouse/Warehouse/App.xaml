@@ -4,6 +4,83 @@
              xmlns:local="clr-namespace:Warehouse"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button"
+               x:Key="MiniButton">
+            <Setter Property="Width"
+                    Value="90" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Width"
+                    Value="150" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Background"
+                    Value="#1f1f1f" />
+            <Setter Property="Foreground"
+                    Value="#ef5d23" />
+        </Style>
+
+        <Style TargetType="TextBlock"
+               x:Key="MainTextBlock">
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="50" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Foreground"
+                    Value="#ef5d23" />
+        </Style>
+
+        <Style TargetType="TextBlock"
+               x:Key="OtherTextBlock">
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="25" />
+            <Setter Property="Width"
+                    Value="150" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="Foreground"
+                    Value="#1f1f1f" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="25" />
+            <Setter Property="Width"
+                    Value="150" />
+            <Setter Property="Height"
+                    Value="30" />
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="25" />
+            <Setter Property="Width"
+                    Value="150" />
+            <Setter Property="Height"
+                    Value="30" />
+        </Style>
     </Application.Resources>
 </Application>

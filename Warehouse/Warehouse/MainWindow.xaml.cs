@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Warehouse.Pages;
 
 namespace Warehouse
 {
@@ -23,6 +24,27 @@ namespace Warehouse
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new AuthorizationPage());
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+            }
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                BackButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BackButton.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

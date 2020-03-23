@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        ContentRendered="Window_ContentRendered"
+        Background="#1f1f1f"
+        Icon="/Warehouse;component/Source/icon.png"
+        Title="{Binding ElementName=MainFrame,Path=Content.Title}" Height="600" Width="900">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0"
+               Grid.Column="0"
+               Source="/Warehouse;component/Source/icon.png" />
+
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Grid.Column="0"
+               Grid.Row="1"
+               Margin="10"
+               Grid.ColumnSpan="3">
+            <Frame.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#ef5d22"
+                                  Offset="0.0" />
+                    <GradientStop Color="#e83824"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Frame.Background>
+        </Frame>
+
+
+        <Button x:Name="BackButton"
+                Grid.Column="2"
+                Style="{StaticResource MiniButton}"
+                Content="Назад"
+                Background="#ef5d23"
+                Foreground="#1f1f1f"
+                Click="BackButton_Click" />
+
+        <TextBlock 
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+                   Text="{Binding ElementName=MainFrame,Path=Content.Title}"
+            Style="{StaticResource MainTextBlock}"/>
+
     </Grid>
 </Window>
