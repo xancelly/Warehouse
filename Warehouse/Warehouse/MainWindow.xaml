@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        ContentRendered="Window_ContentRendered"
         Background="#1f1f1f"
         Icon="/Warehouse;component/Source/icon.png"
-        Title="{Binding ElementName=MainFrame,Path=Content.Title}" Height="600" Width="900">
+        Title="{Binding ElementName=MainFrame,Path=Content.Title}" 
+        Height="700" 
+        Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
@@ -28,6 +29,7 @@
                NavigationUIVisibility="Hidden"
                Grid.Column="0"
                Grid.Row="1"
+               ContentRendered="MainFrame_ContentRendered"
                Margin="10"
                Grid.ColumnSpan="3">
             <Frame.Background>

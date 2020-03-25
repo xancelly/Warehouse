@@ -12,24 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Warehouse.Pages;
+using Warehouse.Entities;
 
 namespace Warehouse.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationPage.xaml
+    /// Логика взаимодействия для RegistrationPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class RegistrationPage : Page
     {
-        public AuthorizationPage()
+        Staff CurrentStaff = null;
+        public RegistrationPage(Staff staff)
         {
             InitializeComponent();
-
-        }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new MenuPage());
+            CurrentStaff = staff;
+            if (CurrentStaff != null)
+            {
+                SaveButton.Content = "Изменить";
+            }
         }
     }
 }

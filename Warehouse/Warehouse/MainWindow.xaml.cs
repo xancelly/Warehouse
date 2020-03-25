@@ -35,7 +35,7 @@ namespace Warehouse
             }
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
             if (MainFrame.CanGoBack)
             {

@@ -12,24 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Warehouse.Pages;
 
 namespace Warehouse.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationPage.xaml
+    /// Логика взаимодействия для MenuPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class MenuPage : Page
     {
-        public AuthorizationPage()
+        public MenuPage()
         {
             InitializeComponent();
-
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void StaffButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MenuPage());
+            NavigationService.Navigate(new StaffPage());
         }
     }
 }

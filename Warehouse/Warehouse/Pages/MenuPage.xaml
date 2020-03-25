@@ -1,0 +1,51 @@
+﻿<Page x:Class="Warehouse.Pages.MenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Warehouse.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="MenuPage">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="StaffButton"
+                        Margin="5"
+                        Content="Сотрудники"
+                        Click="StaffButton_Click" />
+                <Button x:Name="OrganizationButton" 
+                        Content="Организации"
+                        Margin="5"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="GoodsButton"
+                        Margin="5"
+                        Content="Товары" />
+                <Button x:Name="ManufacturerButton"
+                        Content="Производители"
+                        Margin="5" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="WarehouseButton"
+                        Margin="5"
+                        Content="Склад" />
+                <Button x:Name="DocumentButton"
+                        Content="Документы"
+                        Margin="5" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ReceipetInvoiceButton"
+                        Margin="5"
+                        Content="Приходные накладные" />
+                <Button x:Name="ExpenceInvoiceButton"
+                        Content="Расходные накладные"
+                        Margin="5" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
