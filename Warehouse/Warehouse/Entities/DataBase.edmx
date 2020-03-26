@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ttlModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ttlModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -82,7 +82,7 @@
           <Property Name="OGRN" Type="nvarchar" MaxLength="13" />
           <Property Name="INN" Type="nvarchar" MaxLength="10" />
           <Property Name="DateRegistration" Type="date" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
@@ -103,7 +103,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Serial" Type="nvarchar" MaxLength="4" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="5" />
           <Property Name="Number" Type="nvarchar" MaxLength="6" />
           <Property Name="IssuedByWhom" Type="nvarchar(max)" />
           <Property Name="DateOfIssue" Type="date" />
@@ -130,10 +130,10 @@
           <Property Name="Gender" Type="nvarchar" MaxLength="7" />
           <Property Name="IdPassport" Type="int" />
           <Property Name="IdAddress" Type="int" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="18" />
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="INN" Type="nvarchar" MaxLength="12" />
-          <Property Name="Snils" Type="nvarchar" MaxLength="11" />
+          <Property Name="Snils" Type="nvarchar" MaxLength="14" />
           <Property Name="IdRole" Type="int" />
         </EntityType>
         <EntityType Name="TypeDocument">
@@ -586,11 +586,126 @@
             <End Role="WarehouseGood" EntitySet="WarehouseGood" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ttlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ttlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="ttlModel.Address" />
+          <EntitySet Name="Country" EntityType="ttlModel.Country" />
+          <EntitySet Name="Document" EntityType="ttlModel.Document" />
+          <EntitySet Name="DocumentGood" EntityType="ttlModel.DocumentGood" />
+          <EntitySet Name="Good" EntityType="ttlModel.Good" />
+          <EntitySet Name="GroupGood" EntityType="ttlModel.GroupGood" />
+          <EntitySet Name="Manufacturer" EntityType="ttlModel.Manufacturer" />
+          <EntitySet Name="Organization" EntityType="ttlModel.Organization" />
+          <EntitySet Name="Party" EntityType="ttlModel.Party" />
+          <EntitySet Name="Passport" EntityType="ttlModel.Passport" />
+          <EntitySet Name="Role" EntityType="ttlModel.Role" />
+          <EntitySet Name="Staff" EntityType="ttlModel.Staff" />
+          <EntitySet Name="TypeDocument" EntityType="ttlModel.TypeDocument" />
+          <EntitySet Name="TypeOrganization" EntityType="ttlModel.TypeOrganization" />
+          <EntitySet Name="Unit" EntityType="ttlModel.Unit" />
+          <EntitySet Name="Warehouse" EntityType="ttlModel.Warehouse" />
+          <EntitySet Name="WarehouseGood" EntityType="ttlModel.WarehouseGood" />
+          <EntitySet Name="WarehouseOrganization" EntityType="ttlModel.WarehouseOrganization" />
+          <AssociationSet Name="FK__Address__CodeCou__4D94879B" Association="ttlModel.FK__Address__CodeCou__4D94879B">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__IdAdd__59FA5E80" Association="ttlModel.FK__Organizat__IdAdd__59FA5E80">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__IdAddress__534D60F1" Association="ttlModel.FK__Staff__IdAddress__534D60F1">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdAdd__6B24EA82" Association="ttlModel.FK__Warehouse__IdAdd__6B24EA82">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manufactu__CodeC__5EBF139D" Association="ttlModel.FK__Manufactu__CodeC__5EBF139D">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Document__IdReci__7A672E12" Association="ttlModel.FK__Document__IdReci__7A672E12">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Document__IdSene__797309D9" Association="ttlModel.FK__Document__IdSene__797309D9">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Document__IdType__787EE5A0" Association="ttlModel.FK__Document__IdType__787EE5A0">
+            <End Role="TypeDocument" EntitySet="TypeDocument" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Document__IdWarR__7C4F7684" Association="ttlModel.FK__Document__IdWarR__7C4F7684">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Document__IdWarS__7B5B524B" Association="ttlModel.FK__Document__IdWarS__7B5B524B">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DocumentG__IdDoc__7F2BE32F" Association="ttlModel.FK__DocumentG__IdDoc__7F2BE32F">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="DocumentGood" EntitySet="DocumentGood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DocumentG__IdGoo__00200768" Association="ttlModel.FK__DocumentG__IdGoo__00200768">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="DocumentGood" EntitySet="DocumentGood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdGroupGoo__6383C8BA" Association="ttlModel.FK__Good__IdGroupGoo__6383C8BA">
+            <End Role="GroupGood" EntitySet="GroupGood" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdManufact__656C112C" Association="ttlModel.FK__Good__IdManufact__656C112C">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Good__IdUnit__6477ECF3" Association="ttlModel.FK__Good__IdUnit__6477ECF3">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Good" EntitySet="Good" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Party__IdGood__68487DD7" Association="ttlModel.FK__Party__IdGood__68487DD7">
+            <End Role="Good" EntitySet="Good" />
+            <End Role="Party" EntitySet="Party" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__IdTyp__59063A47" Association="ttlModel.FK__Organizat__IdTyp__59063A47">
+            <End Role="TypeOrganization" EntitySet="TypeOrganization" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdOrg__6C190EBB" Association="ttlModel.FK__Warehouse__IdOrg__6C190EBB">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdOrg__6FE99F9F" Association="ttlModel.FK__Warehouse__IdOrg__6FE99F9F">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="WarehouseOrganization" EntitySet="WarehouseOrganization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdPar__73BA3083" Association="ttlModel.FK__Warehouse__IdPar__73BA3083">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="WarehouseGood" EntitySet="WarehouseGood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__IdPasspor__52593CB8" Association="ttlModel.FK__Staff__IdPasspor__52593CB8">
+            <End Role="Passport" EntitySet="Passport" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__IdRole__5441852A" Association="ttlModel.FK__Staff__IdRole__5441852A">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdWar__6EF57B66" Association="ttlModel.FK__Warehouse__IdWar__6EF57B66">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseOrganization" EntitySet="WarehouseOrganization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__IdWar__72C60C4A" Association="ttlModel.FK__Warehouse__IdWar__72C60C4A">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseGood" EntitySet="WarehouseGood" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -602,19 +717,19 @@
           <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="House" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Apartment" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Country" Relationship="Self.FK__Address__CodeCou__4D94879B" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__IdAdd__59FA5E80" FromRole="Address" ToRole="Organization" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdAddress__534D60F1" FromRole="Address" ToRole="Staff" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__IdAdd__6B24EA82" FromRole="Address" ToRole="Warehouse" />
+          <NavigationProperty Name="Country" Relationship="ttlModel.FK__Address__CodeCou__4D94879B" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="Organization" Relationship="ttlModel.FK__Organizat__IdAdd__59FA5E80" FromRole="Address" ToRole="Organization" />
+          <NavigationProperty Name="Staff" Relationship="ttlModel.FK__Staff__IdAddress__534D60F1" FromRole="Address" ToRole="Staff" />
+          <NavigationProperty Name="Warehouse" Relationship="ttlModel.FK__Warehouse__IdAdd__6B24EA82" FromRole="Address" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Code" />
           </Key>
-          <Property Name="Code" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Address__CodeCou__4D94879B" FromRole="Country" ToRole="Address" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Manufactu__CodeC__5EBF139D" FromRole="Country" ToRole="Manufacturer" />
+          <NavigationProperty Name="Address" Relationship="ttlModel.FK__Address__CodeCou__4D94879B" FromRole="Country" ToRole="Address" />
+          <NavigationProperty Name="Manufacturer" Relationship="ttlModel.FK__Manufactu__CodeC__5EBF139D" FromRole="Country" ToRole="Manufacturer" />
         </EntityType>
         <EntityType Name="Document">
           <Key>
@@ -627,12 +742,12 @@
           <Property Name="IdWarSender" Type="Int32" />
           <Property Name="IdWarRecipient" Type="Int32" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK__Document__IdReci__7A672E12" FromRole="Document" ToRole="Organization" />
-          <NavigationProperty Name="Organization1" Relationship="Self.FK__Document__IdSene__797309D9" FromRole="Document" ToRole="Organization" />
-          <NavigationProperty Name="TypeDocument" Relationship="Self.FK__Document__IdType__787EE5A0" FromRole="Document" ToRole="TypeDocument" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK__Document__IdWarR__7C4F7684" FromRole="Document" ToRole="Warehouse" />
-          <NavigationProperty Name="Warehouse1" Relationship="Self.FK__Document__IdWarS__7B5B524B" FromRole="Document" ToRole="Warehouse" />
-          <NavigationProperty Name="DocumentGood" Relationship="Self.FK__DocumentG__IdDoc__7F2BE32F" FromRole="Document" ToRole="DocumentGood" />
+          <NavigationProperty Name="Organization" Relationship="ttlModel.FK__Document__IdReci__7A672E12" FromRole="Document" ToRole="Organization" />
+          <NavigationProperty Name="Organization1" Relationship="ttlModel.FK__Document__IdSene__797309D9" FromRole="Document" ToRole="Organization" />
+          <NavigationProperty Name="TypeDocument" Relationship="ttlModel.FK__Document__IdType__787EE5A0" FromRole="Document" ToRole="TypeDocument" />
+          <NavigationProperty Name="Warehouse" Relationship="ttlModel.FK__Document__IdWarR__7C4F7684" FromRole="Document" ToRole="Warehouse" />
+          <NavigationProperty Name="Warehouse1" Relationship="ttlModel.FK__Document__IdWarS__7B5B524B" FromRole="Document" ToRole="Warehouse" />
+          <NavigationProperty Name="DocumentGood" Relationship="ttlModel.FK__DocumentG__IdDoc__7F2BE32F" FromRole="Document" ToRole="DocumentGood" />
         </EntityType>
         <EntityType Name="DocumentGood">
           <Key>
@@ -643,8 +758,8 @@
           <Property Name="IdGood" Type="Int32" />
           <Property Name="Count" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Document" Relationship="Self.FK__DocumentG__IdDoc__7F2BE32F" FromRole="DocumentGood" ToRole="Document" />
-          <NavigationProperty Name="Good" Relationship="Self.FK__DocumentG__IdGoo__00200768" FromRole="DocumentGood" ToRole="Good" />
+          <NavigationProperty Name="Document" Relationship="ttlModel.FK__DocumentG__IdDoc__7F2BE32F" FromRole="DocumentGood" ToRole="Document" />
+          <NavigationProperty Name="Good" Relationship="ttlModel.FK__DocumentG__IdGoo__00200768" FromRole="DocumentGood" ToRole="Good" />
         </EntityType>
         <EntityType Name="Good">
           <Key>
@@ -656,11 +771,11 @@
           <Property Name="IdUnit" Type="Int32" />
           <Property Name="IdManufacturer" Type="Int32" />
           <Property Name="ShelfLife" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="DocumentGood" Relationship="Self.FK__DocumentG__IdGoo__00200768" FromRole="Good" ToRole="DocumentGood" />
-          <NavigationProperty Name="GroupGood" Relationship="Self.FK__Good__IdGroupGoo__6383C8BA" FromRole="Good" ToRole="GroupGood" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Good__IdManufact__656C112C" FromRole="Good" ToRole="Manufacturer" />
-          <NavigationProperty Name="Unit" Relationship="Self.FK__Good__IdUnit__6477ECF3" FromRole="Good" ToRole="Unit" />
-          <NavigationProperty Name="Party" Relationship="Self.FK__Party__IdGood__68487DD7" FromRole="Good" ToRole="Party" />
+          <NavigationProperty Name="DocumentGood" Relationship="ttlModel.FK__DocumentG__IdGoo__00200768" FromRole="Good" ToRole="DocumentGood" />
+          <NavigationProperty Name="GroupGood" Relationship="ttlModel.FK__Good__IdGroupGoo__6383C8BA" FromRole="Good" ToRole="GroupGood" />
+          <NavigationProperty Name="Manufacturer" Relationship="ttlModel.FK__Good__IdManufact__656C112C" FromRole="Good" ToRole="Manufacturer" />
+          <NavigationProperty Name="Unit" Relationship="ttlModel.FK__Good__IdUnit__6477ECF3" FromRole="Good" ToRole="Unit" />
+          <NavigationProperty Name="Party" Relationship="ttlModel.FK__Party__IdGood__68487DD7" FromRole="Good" ToRole="Party" />
         </EntityType>
         <EntityType Name="GroupGood">
           <Key>
@@ -668,7 +783,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Good" Relationship="Self.FK__Good__IdGroupGoo__6383C8BA" FromRole="GroupGood" ToRole="Good" />
+          <NavigationProperty Name="Good" Relationship="ttlModel.FK__Good__IdGroupGoo__6383C8BA" FromRole="GroupGood" ToRole="Good" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -677,8 +792,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CodeCountry" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Country" Relationship="Self.FK__Manufactu__CodeC__5EBF139D" FromRole="Manufacturer" ToRole="Country" />
-          <NavigationProperty Name="Good" Relationship="Self.FK__Good__IdManufact__656C112C" FromRole="Manufacturer" ToRole="Good" />
+          <NavigationProperty Name="Country" Relationship="ttlModel.FK__Manufactu__CodeC__5EBF139D" FromRole="Manufacturer" ToRole="Country" />
+          <NavigationProperty Name="Good" Relationship="ttlModel.FK__Good__IdManufact__656C112C" FromRole="Manufacturer" ToRole="Good" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -690,17 +805,17 @@
           <Property Name="OGRN" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Name="INN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DateRegistration" Type="DateTime" Precision="0" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdAddress" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Organizat__IdAdd__59FA5E80" FromRole="Organization" ToRole="Address" />
-          <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdReci__7A672E12" FromRole="Organization" ToRole="Document" />
-          <NavigationProperty Name="Document1" Relationship="Self.FK__Document__IdSene__797309D9" FromRole="Organization" ToRole="Document" />
-          <NavigationProperty Name="TypeOrganization" Relationship="Self.FK__Organizat__IdTyp__59063A47" FromRole="Organization" ToRole="TypeOrganization" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__IdOrg__6C190EBB" FromRole="Organization" ToRole="Warehouse" />
-          <NavigationProperty Name="WarehouseOrganization" Relationship="Self.FK__Warehouse__IdOrg__6FE99F9F" FromRole="Organization" ToRole="WarehouseOrganization" />
+          <NavigationProperty Name="Address" Relationship="ttlModel.FK__Organizat__IdAdd__59FA5E80" FromRole="Organization" ToRole="Address" />
+          <NavigationProperty Name="Document" Relationship="ttlModel.FK__Document__IdReci__7A672E12" FromRole="Organization" ToRole="Document" />
+          <NavigationProperty Name="Document1" Relationship="ttlModel.FK__Document__IdSene__797309D9" FromRole="Organization" ToRole="Document" />
+          <NavigationProperty Name="TypeOrganization" Relationship="ttlModel.FK__Organizat__IdTyp__59063A47" FromRole="Organization" ToRole="TypeOrganization" />
+          <NavigationProperty Name="Warehouse" Relationship="ttlModel.FK__Warehouse__IdOrg__6C190EBB" FromRole="Organization" ToRole="Warehouse" />
+          <NavigationProperty Name="WarehouseOrganization" Relationship="ttlModel.FK__Warehouse__IdOrg__6FE99F9F" FromRole="Organization" ToRole="WarehouseOrganization" />
         </EntityType>
         <EntityType Name="Party">
           <Key>
@@ -711,19 +826,19 @@
           <Property Name="IdGood" Type="Int32" />
           <Property Name="Count" Type="Int32" />
           <Property Name="DateProduction" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Good" Relationship="Self.FK__Party__IdGood__68487DD7" FromRole="Party" ToRole="Good" />
-          <NavigationProperty Name="WarehouseGood" Relationship="Self.FK__Warehouse__IdPar__73BA3083" FromRole="Party" ToRole="WarehouseGood" />
+          <NavigationProperty Name="Good" Relationship="ttlModel.FK__Party__IdGood__68487DD7" FromRole="Party" ToRole="Good" />
+          <NavigationProperty Name="WarehouseGood" Relationship="ttlModel.FK__Warehouse__IdPar__73BA3083" FromRole="Party" ToRole="WarehouseGood" />
         </EntityType>
         <EntityType Name="Passport">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Serial" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Serial" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="Number" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="IssuedByWhom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfIssue" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdPasspor__52593CB8" FromRole="Passport" ToRole="Staff" />
+          <NavigationProperty Name="Staff" Relationship="ttlModel.FK__Staff__IdPasspor__52593CB8" FromRole="Passport" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -731,7 +846,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdRole__5441852A" FromRole="Role" ToRole="Staff" />
+          <NavigationProperty Name="Staff" Relationship="ttlModel.FK__Staff__IdRole__5441852A" FromRole="Role" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -748,14 +863,14 @@
           <Property Name="Gender" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
           <Property Name="IdPassport" Type="Int32" />
           <Property Name="IdAddress" Type="Int32" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="INN" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="Snils" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Snils" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Staff__IdAddress__534D60F1" FromRole="Staff" ToRole="Address" />
-          <NavigationProperty Name="Passport" Relationship="Self.FK__Staff__IdPasspor__52593CB8" FromRole="Staff" ToRole="Passport" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__Staff__IdRole__5441852A" FromRole="Staff" ToRole="Role" />
+          <NavigationProperty Name="Address" Relationship="ttlModel.FK__Staff__IdAddress__534D60F1" FromRole="Staff" ToRole="Address" />
+          <NavigationProperty Name="Passport" Relationship="ttlModel.FK__Staff__IdPasspor__52593CB8" FromRole="Staff" ToRole="Passport" />
+          <NavigationProperty Name="Role" Relationship="ttlModel.FK__Staff__IdRole__5441852A" FromRole="Staff" ToRole="Role" />
         </EntityType>
         <EntityType Name="TypeDocument">
           <Key>
@@ -763,15 +878,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdType__787EE5A0" FromRole="TypeDocument" ToRole="Document" />
+          <NavigationProperty Name="Document" Relationship="ttlModel.FK__Document__IdType__787EE5A0" FromRole="TypeDocument" ToRole="Document" />
         </EntityType>
         <EntityType Name="TypeOrganization">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__IdTyp__59063A47" FromRole="TypeOrganization" ToRole="Organization" />
+          <NavigationProperty Name="Organization" Relationship="ttlModel.FK__Organizat__IdTyp__59063A47" FromRole="TypeOrganization" ToRole="Organization" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -780,7 +895,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Designation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Good" Relationship="Self.FK__Good__IdUnit__6477ECF3" FromRole="Unit" ToRole="Good" />
+          <NavigationProperty Name="Good" Relationship="ttlModel.FK__Good__IdUnit__6477ECF3" FromRole="Unit" ToRole="Good" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -789,12 +904,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdAddress" Type="Int32" />
           <Property Name="IdOrganization" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Warehouse__IdAdd__6B24EA82" FromRole="Warehouse" ToRole="Address" />
-          <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdWarR__7C4F7684" FromRole="Warehouse" ToRole="Document" />
-          <NavigationProperty Name="Document1" Relationship="Self.FK__Document__IdWarS__7B5B524B" FromRole="Warehouse" ToRole="Document" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK__Warehouse__IdOrg__6C190EBB" FromRole="Warehouse" ToRole="Organization" />
-          <NavigationProperty Name="WarehouseOrganization" Relationship="Self.FK__Warehouse__IdWar__6EF57B66" FromRole="Warehouse" ToRole="WarehouseOrganization" />
-          <NavigationProperty Name="WarehouseGood" Relationship="Self.FK__Warehouse__IdWar__72C60C4A" FromRole="Warehouse" ToRole="WarehouseGood" />
+          <NavigationProperty Name="Address" Relationship="ttlModel.FK__Warehouse__IdAdd__6B24EA82" FromRole="Warehouse" ToRole="Address" />
+          <NavigationProperty Name="Document" Relationship="ttlModel.FK__Document__IdWarR__7C4F7684" FromRole="Warehouse" ToRole="Document" />
+          <NavigationProperty Name="Document1" Relationship="ttlModel.FK__Document__IdWarS__7B5B524B" FromRole="Warehouse" ToRole="Document" />
+          <NavigationProperty Name="Organization" Relationship="ttlModel.FK__Warehouse__IdOrg__6C190EBB" FromRole="Warehouse" ToRole="Organization" />
+          <NavigationProperty Name="WarehouseOrganization" Relationship="ttlModel.FK__Warehouse__IdWar__6EF57B66" FromRole="Warehouse" ToRole="WarehouseOrganization" />
+          <NavigationProperty Name="WarehouseGood" Relationship="ttlModel.FK__Warehouse__IdWar__72C60C4A" FromRole="Warehouse" ToRole="WarehouseGood" />
         </EntityType>
         <EntityType Name="WarehouseGood">
           <Key>
@@ -803,8 +918,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdWarehouse" Type="Int32" />
           <Property Name="IdParty" Type="Int32" />
-          <NavigationProperty Name="Party" Relationship="Self.FK__Warehouse__IdPar__73BA3083" FromRole="WarehouseGood" ToRole="Party" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__IdWar__72C60C4A" FromRole="WarehouseGood" ToRole="Warehouse" />
+          <NavigationProperty Name="Party" Relationship="ttlModel.FK__Warehouse__IdPar__73BA3083" FromRole="WarehouseGood" ToRole="Party" />
+          <NavigationProperty Name="Warehouse" Relationship="ttlModel.FK__Warehouse__IdWar__72C60C4A" FromRole="WarehouseGood" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="WarehouseOrganization">
           <Key>
@@ -813,12 +928,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdWarehouse" Type="Int32" />
           <Property Name="IdOrganization" Type="Int32" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK__Warehouse__IdOrg__6FE99F9F" FromRole="WarehouseOrganization" ToRole="Organization" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__IdWar__6EF57B66" FromRole="WarehouseOrganization" ToRole="Warehouse" />
+          <NavigationProperty Name="Organization" Relationship="ttlModel.FK__Warehouse__IdOrg__6FE99F9F" FromRole="WarehouseOrganization" ToRole="Organization" />
+          <NavigationProperty Name="Warehouse" Relationship="ttlModel.FK__Warehouse__IdWar__6EF57B66" FromRole="WarehouseOrganization" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK__Address__CodeCou__4D94879B">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <End Type="ttlModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="ttlModel.Address" Role="Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="Code" />
@@ -829,8 +944,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Organizat__IdAdd__59FA5E80">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <End Type="ttlModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Id" />
@@ -841,8 +956,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Staff__IdAddress__534D60F1">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <End Type="ttlModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="ttlModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Id" />
@@ -853,8 +968,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdAdd__6B24EA82">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <End Type="ttlModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Id" />
@@ -865,8 +980,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Manufactu__CodeC__5EBF139D">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="*" />
+          <End Type="ttlModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="ttlModel.Manufacturer" Role="Manufacturer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="Code" />
@@ -877,8 +992,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Document__IdReci__7A672E12">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="Id" />
@@ -889,8 +1004,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Document__IdSene__797309D9">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="Id" />
@@ -901,8 +1016,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Document__IdType__787EE5A0">
-          <End Role="TypeDocument" Type="Self.TypeDocument" Multiplicity="0..1" />
-          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <End Type="ttlModel.TypeDocument" Role="TypeDocument" Multiplicity="0..1" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeDocument">
               <PropertyRef Name="Id" />
@@ -913,8 +1028,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Document__IdWarR__7C4F7684">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
-          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="Id" />
@@ -925,8 +1040,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Document__IdWarS__7B5B524B">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
-          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="Id" />
@@ -937,8 +1052,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DocumentG__IdDoc__7F2BE32F">
-          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
-          <End Role="DocumentGood" Type="Self.DocumentGood" Multiplicity="*" />
+          <End Type="ttlModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="ttlModel.DocumentGood" Role="DocumentGood" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Document">
               <PropertyRef Name="Id" />
@@ -949,8 +1064,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DocumentG__IdGoo__00200768">
-          <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
-          <End Role="DocumentGood" Type="Self.DocumentGood" Multiplicity="*" />
+          <End Type="ttlModel.Good" Role="Good" Multiplicity="0..1" />
+          <End Type="ttlModel.DocumentGood" Role="DocumentGood" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Good">
               <PropertyRef Name="Id" />
@@ -961,8 +1076,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Good__IdGroupGoo__6383C8BA">
-          <End Role="GroupGood" Type="Self.GroupGood" Multiplicity="0..1" />
-          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <End Type="ttlModel.GroupGood" Role="GroupGood" Multiplicity="0..1" />
+          <End Type="ttlModel.Good" Role="Good" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GroupGood">
               <PropertyRef Name="Id" />
@@ -973,8 +1088,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Good__IdManufact__656C112C">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
-          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <End Type="ttlModel.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
+          <End Type="ttlModel.Good" Role="Good" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manufacturer">
               <PropertyRef Name="Id" />
@@ -985,8 +1100,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Good__IdUnit__6477ECF3">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
-          <End Role="Good" Type="Self.Good" Multiplicity="*" />
+          <End Type="ttlModel.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="ttlModel.Good" Role="Good" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Unit">
               <PropertyRef Name="Id" />
@@ -997,8 +1112,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Party__IdGood__68487DD7">
-          <End Role="Good" Type="Self.Good" Multiplicity="0..1" />
-          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <End Type="ttlModel.Good" Role="Good" Multiplicity="0..1" />
+          <End Type="ttlModel.Party" Role="Party" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Good">
               <PropertyRef Name="Id" />
@@ -1009,8 +1124,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Organizat__IdTyp__59063A47">
-          <End Role="TypeOrganization" Type="Self.TypeOrganization" Multiplicity="0..1" />
-          <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+          <End Type="ttlModel.TypeOrganization" Role="TypeOrganization" Multiplicity="0..1" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeOrganization">
               <PropertyRef Name="Id" />
@@ -1021,8 +1136,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdOrg__6C190EBB">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="Id" />
@@ -1033,8 +1148,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdOrg__6FE99F9F">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
-          <End Role="WarehouseOrganization" Type="Self.WarehouseOrganization" Multiplicity="*" />
+          <End Type="ttlModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ttlModel.WarehouseOrganization" Role="WarehouseOrganization" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="Id" />
@@ -1045,8 +1160,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdPar__73BA3083">
-          <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
-          <End Role="WarehouseGood" Type="Self.WarehouseGood" Multiplicity="*" />
+          <End Type="ttlModel.Party" Role="Party" Multiplicity="0..1" />
+          <End Type="ttlModel.WarehouseGood" Role="WarehouseGood" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Party">
               <PropertyRef Name="Id" />
@@ -1057,8 +1172,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Staff__IdPasspor__52593CB8">
-          <End Role="Passport" Type="Self.Passport" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <End Type="ttlModel.Passport" Role="Passport" Multiplicity="0..1" />
+          <End Type="ttlModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Passport">
               <PropertyRef Name="Id" />
@@ -1069,8 +1184,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Staff__IdRole__5441852A">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <End Type="ttlModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="ttlModel.Staff" Role="Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -1081,8 +1196,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdWar__6EF57B66">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
-          <End Role="WarehouseOrganization" Type="Self.WarehouseOrganization" Multiplicity="*" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="ttlModel.WarehouseOrganization" Role="WarehouseOrganization" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="Id" />
@@ -1093,8 +1208,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Warehouse__IdWar__72C60C4A">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
-          <End Role="WarehouseGood" Type="Self.WarehouseGood" Multiplicity="*" />
+          <End Type="ttlModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="ttlModel.WarehouseGood" Role="WarehouseGood" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="Id" />
@@ -1104,123 +1219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ttlEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Address" EntityType="Self.Address" />
-          <EntitySet Name="Country" EntityType="Self.Country" />
-          <EntitySet Name="Document" EntityType="Self.Document" />
-          <EntitySet Name="DocumentGood" EntityType="Self.DocumentGood" />
-          <EntitySet Name="Good" EntityType="Self.Good" />
-          <EntitySet Name="GroupGood" EntityType="Self.GroupGood" />
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
-          <EntitySet Name="Organization" EntityType="Self.Organization" />
-          <EntitySet Name="Party" EntityType="Self.Party" />
-          <EntitySet Name="Passport" EntityType="Self.Passport" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Staff" EntityType="Self.Staff" />
-          <EntitySet Name="TypeDocument" EntityType="Self.TypeDocument" />
-          <EntitySet Name="TypeOrganization" EntityType="Self.TypeOrganization" />
-          <EntitySet Name="Unit" EntityType="Self.Unit" />
-          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
-          <EntitySet Name="WarehouseGood" EntityType="Self.WarehouseGood" />
-          <EntitySet Name="WarehouseOrganization" EntityType="Self.WarehouseOrganization" />
-          <AssociationSet Name="FK__Address__CodeCou__4D94879B" Association="Self.FK__Address__CodeCou__4D94879B">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Organizat__IdAdd__59FA5E80" Association="Self.FK__Organizat__IdAdd__59FA5E80">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Organization" EntitySet="Organization" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__IdAddress__534D60F1" Association="Self.FK__Staff__IdAddress__534D60F1">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdAdd__6B24EA82" Association="Self.FK__Warehouse__IdAdd__6B24EA82">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Warehouse" EntitySet="Warehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Manufactu__CodeC__5EBF139D" Association="Self.FK__Manufactu__CodeC__5EBF139D">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Document__IdReci__7A672E12" Association="Self.FK__Document__IdReci__7A672E12">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="Document" EntitySet="Document" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Document__IdSene__797309D9" Association="Self.FK__Document__IdSene__797309D9">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="Document" EntitySet="Document" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Document__IdType__787EE5A0" Association="Self.FK__Document__IdType__787EE5A0">
-            <End Role="TypeDocument" EntitySet="TypeDocument" />
-            <End Role="Document" EntitySet="Document" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Document__IdWarR__7C4F7684" Association="Self.FK__Document__IdWarR__7C4F7684">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="Document" EntitySet="Document" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Document__IdWarS__7B5B524B" Association="Self.FK__Document__IdWarS__7B5B524B">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="Document" EntitySet="Document" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocumentG__IdDoc__7F2BE32F" Association="Self.FK__DocumentG__IdDoc__7F2BE32F">
-            <End Role="Document" EntitySet="Document" />
-            <End Role="DocumentGood" EntitySet="DocumentGood" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocumentG__IdGoo__00200768" Association="Self.FK__DocumentG__IdGoo__00200768">
-            <End Role="Good" EntitySet="Good" />
-            <End Role="DocumentGood" EntitySet="DocumentGood" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Good__IdGroupGoo__6383C8BA" Association="Self.FK__Good__IdGroupGoo__6383C8BA">
-            <End Role="GroupGood" EntitySet="GroupGood" />
-            <End Role="Good" EntitySet="Good" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Good__IdManufact__656C112C" Association="Self.FK__Good__IdManufact__656C112C">
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Good" EntitySet="Good" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Good__IdUnit__6477ECF3" Association="Self.FK__Good__IdUnit__6477ECF3">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="Good" EntitySet="Good" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Party__IdGood__68487DD7" Association="Self.FK__Party__IdGood__68487DD7">
-            <End Role="Good" EntitySet="Good" />
-            <End Role="Party" EntitySet="Party" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Organizat__IdTyp__59063A47" Association="Self.FK__Organizat__IdTyp__59063A47">
-            <End Role="TypeOrganization" EntitySet="TypeOrganization" />
-            <End Role="Organization" EntitySet="Organization" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdOrg__6C190EBB" Association="Self.FK__Warehouse__IdOrg__6C190EBB">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="Warehouse" EntitySet="Warehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdOrg__6FE99F9F" Association="Self.FK__Warehouse__IdOrg__6FE99F9F">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="WarehouseOrganization" EntitySet="WarehouseOrganization" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdPar__73BA3083" Association="Self.FK__Warehouse__IdPar__73BA3083">
-            <End Role="Party" EntitySet="Party" />
-            <End Role="WarehouseGood" EntitySet="WarehouseGood" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__IdPasspor__52593CB8" Association="Self.FK__Staff__IdPasspor__52593CB8">
-            <End Role="Passport" EntitySet="Passport" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Staff__IdRole__5441852A" Association="Self.FK__Staff__IdRole__5441852A">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdWar__6EF57B66" Association="Self.FK__Warehouse__IdWar__6EF57B66">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="WarehouseOrganization" EntitySet="WarehouseOrganization" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Warehouse__IdWar__72C60C4A" Association="Self.FK__Warehouse__IdWar__72C60C4A">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="WarehouseGood" EntitySet="WarehouseGood" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1229,195 +1228,195 @@
           <EntitySetMapping Name="Address">
             <EntityTypeMapping TypeName="ttlModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CodeCountry" ColumnName="CodeCountry" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="House" ColumnName="House" />
                 <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="CodeCountry" ColumnName="CodeCountry" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Country">
             <EntityTypeMapping TypeName="ttlModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Document">
             <EntityTypeMapping TypeName="ttlModel.Document">
               <MappingFragment StoreEntitySet="Document">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdTypeDocument" ColumnName="IdTypeDocument" />
-                <ScalarProperty Name="IdSener" ColumnName="IdSener" />
-                <ScalarProperty Name="IdRecipient" ColumnName="IdRecipient" />
-                <ScalarProperty Name="IdWarSender" ColumnName="IdWarSender" />
-                <ScalarProperty Name="IdWarRecipient" ColumnName="IdWarRecipient" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdWarRecipient" ColumnName="IdWarRecipient" />
+                <ScalarProperty Name="IdWarSender" ColumnName="IdWarSender" />
+                <ScalarProperty Name="IdRecipient" ColumnName="IdRecipient" />
+                <ScalarProperty Name="IdSener" ColumnName="IdSener" />
+                <ScalarProperty Name="IdTypeDocument" ColumnName="IdTypeDocument" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentGood">
             <EntityTypeMapping TypeName="ttlModel.DocumentGood">
               <MappingFragment StoreEntitySet="DocumentGood">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
-                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Good">
             <EntityTypeMapping TypeName="ttlModel.Good">
               <MappingFragment StoreEntitySet="Good">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IdGroupGood" ColumnName="IdGroupGood" />
-                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
-                <ScalarProperty Name="IdManufacturer" ColumnName="IdManufacturer" />
                 <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="IdManufacturer" ColumnName="IdManufacturer" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+                <ScalarProperty Name="IdGroupGood" ColumnName="IdGroupGood" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GroupGood">
             <EntityTypeMapping TypeName="ttlModel.GroupGood">
               <MappingFragment StoreEntitySet="GroupGood">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manufacturer">
             <EntityTypeMapping TypeName="ttlModel.Manufacturer">
               <MappingFragment StoreEntitySet="Manufacturer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CodeCountry" ColumnName="CodeCountry" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Organization">
             <EntityTypeMapping TypeName="ttlModel.Organization">
               <MappingFragment StoreEntitySet="Organization">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdTypeOrg" ColumnName="IdTypeOrg" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="OGRN" ColumnName="OGRN" />
-                <ScalarProperty Name="INN" ColumnName="INN" />
-                <ScalarProperty Name="DateRegistration" ColumnName="DateRegistration" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateRegistration" ColumnName="DateRegistration" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="OGRN" ColumnName="OGRN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdTypeOrg" ColumnName="IdTypeOrg" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Party">
             <EntityTypeMapping TypeName="ttlModel.Party">
               <MappingFragment StoreEntitySet="Party">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="DateProduction" ColumnName="DateProduction" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdGood" ColumnName="IdGood" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Passport">
             <EntityTypeMapping TypeName="ttlModel.Passport">
               <MappingFragment StoreEntitySet="Passport">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Serial" ColumnName="Serial" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="IssuedByWhom" ColumnName="IssuedByWhom" />
                 <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+                <ScalarProperty Name="IssuedByWhom" ColumnName="IssuedByWhom" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="ttlModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="ttlModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="IdPassport" ColumnName="IdPassport" />
-                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="INN" ColumnName="INN" />
-                <ScalarProperty Name="Snils" ColumnName="Snils" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="Snils" ColumnName="Snils" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="IdPassport" ColumnName="IdPassport" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeDocument">
             <EntityTypeMapping TypeName="ttlModel.TypeDocument">
               <MappingFragment StoreEntitySet="TypeDocument">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeOrganization">
             <EntityTypeMapping TypeName="ttlModel.TypeOrganization">
               <MappingFragment StoreEntitySet="TypeOrganization">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="ttlModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Warehouse">
             <EntityTypeMapping TypeName="ttlModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouse">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
                 <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WarehouseGood">
             <EntityTypeMapping TypeName="ttlModel.WarehouseGood">
               <MappingFragment StoreEntitySet="WarehouseGood">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdWarehouse" ColumnName="IdWarehouse" />
                 <ScalarProperty Name="IdParty" ColumnName="IdParty" />
+                <ScalarProperty Name="IdWarehouse" ColumnName="IdWarehouse" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WarehouseOrganization">
             <EntityTypeMapping TypeName="ttlModel.WarehouseOrganization">
               <MappingFragment StoreEntitySet="WarehouseOrganization">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdWarehouse" ColumnName="IdWarehouse" />
                 <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+                <ScalarProperty Name="IdWarehouse" ColumnName="IdWarehouse" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

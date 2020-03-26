@@ -38,14 +38,14 @@
                                     Width="*"
                                     Binding="{Binding FullnameStaff}" />
                 <DataGridTextColumn Header="Пол"
-                                    Width="*"
+                                    Width="100"
                                     Binding="{Binding Gender}" />
                 <DataGridTextColumn Header="E-Mail"
                                     Width="*"
                                     Binding="{Binding Email}" />
                 <DataGridTextColumn Header="Номер телефона"
                                     Width="*"
-                                    Binding="{Binding Phone}" />
+                                    Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Header="Дата рождения"
                                     Width="*"
                                     Binding="{Binding DateOfBirth, StringFormat= {}dd.MM.yyyy}" />

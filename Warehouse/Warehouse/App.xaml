@@ -62,6 +62,19 @@
                     Value="#1f1f1f" />
         </Style>
 
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily"
+                    Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />
+            <Setter Property="FontSize"
+                    Value="25" />
+            <Setter Property="Width"
+                    Value="210" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="Foreground"
+                    Value="#1f1f1f" />
+        </Style>
+
         <Style TargetType="TextBox">
             <Setter Property="FontFamily"
                     Value="/Warehouse;component/Fonts/#Futuris Cyrillic" />

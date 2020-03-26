@@ -33,16 +33,12 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
                         Margin="5">
                 <Button x:Name="LoginButton"
-                        Content="Вход" 
+                        Content="Вход"
                         Margin="5"
                         Click="LoginButton_Click" />
-
-                <Button x:Name="RegistrationButton"
-                        Content="Регистрация"
-                        Margin="5"
-                        />
             </StackPanel>
         </StackPanel>
         
