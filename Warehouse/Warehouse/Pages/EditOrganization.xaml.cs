@@ -117,7 +117,7 @@ namespace Warehouse.Pages
                                                             }
                                                             else
                                                             {
-                                                                MessageBox.Show("Организация с таким название уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                                MessageBox.Show("Организация с таким названием уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                                                 NameTextBox.Focus();
                                                             }
 
