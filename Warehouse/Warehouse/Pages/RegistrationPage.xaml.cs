@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +24,7 @@ namespace Warehouse.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
+        BitmapImage image;
         Staff CurrentStaff = null;
         public RegistrationPage(Staff staff)
         {
@@ -78,139 +82,151 @@ namespace Warehouse.Pages
                                 {
                                     if (PhoneTextBox.Text.Length == 18 && (PhoneTextBox.Text.IndexOfAny(letterList.ToCharArray()) <= -1))
                                     {
-                                        if (InnTextBox.Text.Length == 12)
+                                        if (new EmailAddressAttribute().IsValid(EmailTextBox.Text))
                                         {
-                                            if (SnilsTextBox.Text.Length == 14)
+                                            if (InnTextBox.Text.Length == 12 && !InnTextBox.Text.Contains('_'))
                                             {
-                                                if (AreaTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
+                                                if (SnilsTextBox.Text.Length == 14 && !SnilsTextBox.Text.Contains('_'))
                                                 {
-                                                    if (CityTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
+                                                    if (AreaTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
                                                     {
-                                                        if (PassportTextBox.Text.Length == 12)
+                                                        if (CityTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
                                                         {
-                                                            if (DateOfIssueDatePicker.SelectedDate < DateTime.Today)
+                                                            if (PassportTextBox.Text.Length == 12)
                                                             {
-                                                                if (DateOfBirthDatePicker.SelectedDate < DateTime.Today)
+                                                                if (DateOfIssueDatePicker.SelectedDate < DateTime.Today)
                                                                 {
-                                                                    if (CurrentStaff == null)
+                                                                    if (DateOfBirthDatePicker.SelectedDate < DateTime.Today)
                                                                     {
-                                                                        if (AppData.Context.Staff.Where(c => c.Login == LoginTextBox.Text).FirstOrDefault() == null)
+                                                                        if (CurrentStaff == null)
                                                                         {
-                                                                            Address CurrentAddress = new Address()
+                                                                            if (AppData.Context.Staff.Where(c => c.Login == LoginTextBox.Text).FirstOrDefault() == null)
                                                                             {
-                                                                                CodeCountry = "RU",
-                                                                                Region = AreaTextBox.Text,
-                                                                                City = CityTextBox.Text,
-                                                                                Street = StreetTextBox.Text,
-                                                                                House = HouseTextBox.Text,
-                                                                                Apartment = ApartmentTextBox.Text,
-                                                                            };
-                                                                            AppData.Context.Address.Add(CurrentAddress);
-                                                                            Passport CurrentPassport = new Passport()
+                                                                                Address CurrentAddress = new Address()
+                                                                                {
+                                                                                    CodeCountry = "RU",
+                                                                                    Region = AreaTextBox.Text,
+                                                                                    City = CityTextBox.Text,
+                                                                                    Street = StreetTextBox.Text,
+                                                                                    House = HouseTextBox.Text,
+                                                                                    Apartment = ApartmentTextBox.Text,
+                                                                                };
+                                                                                AppData.Context.Address.Add(CurrentAddress);
+                                                                                Passport CurrentPassport = new Passport()
+                                                                                {
+                                                                                    Serial = PassportTextBox.Text.Remove(5, 7),
+                                                                                    Number = PassportTextBox.Text.Remove(0, 6),
+                                                                                    DateOfIssue = DateOfIssueDatePicker.SelectedDate,
+                                                                                    IssuedByWhom = IssuedByWhomTextBox.Text,
+                                                                                };
+                                                                                AppData.Context.Passport.Add(CurrentPassport);
+                                                                                CurrentStaff = new Staff()
+                                                                                {
+                                                                                    Login = LoginTextBox.Text,
+                                                                                    Password = PasswordTextBox.Password,
+                                                                                    LastName = LastNameTextBox.Text,
+                                                                                    FirstName = FirstNameTextBox.Text,
+                                                                                    MiddleName = MiddleNameTextBox.Text,
+                                                                                    Gender = GenderComboBox.Text,
+                                                                                    PhoneNumber = PhoneTextBox.Text,
+                                                                                    Email = EmailTextBox.Text,
+                                                                                    INN = InnTextBox.Text,
+                                                                                    Snils = SnilsTextBox.Text,
+                                                                                    DateOfBirth = DateOfBirthDatePicker.SelectedDate,
+                                                                                    IdAddress = CurrentAddress.Id,
+                                                                                    IdPassport = CurrentPassport.Id,
+                                                                                    IdRole = 1,
+                                                                                    ImagePreview = StaffImage.DataContext as byte[],
+                                                                                };
+                                                                                AppData.Context.Staff.Add(CurrentStaff);
+                                                                                MessageBox.Show("Сотрудник успешно зарегистрирован!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                                                AppData.Context.SaveChanges();
+                                                                                NavigationService.GoBack();
+                                                                            }
+                                                                            else
                                                                             {
-                                                                                Serial = PassportTextBox.Text.Remove(5, 7),
-                                                                                Number = PassportTextBox.Text.Remove(0, 6),
-                                                                                DateOfIssue = DateOfIssueDatePicker.SelectedDate,
-                                                                                IssuedByWhom = IssuedByWhomTextBox.Text,
-                                                                            };
-                                                                            AppData.Context.Passport.Add(CurrentPassport);
-                                                                            CurrentStaff = new Staff()
-                                                                            {
-                                                                                Login = LoginTextBox.Text,
-                                                                                Password = PasswordTextBox.Password,
-                                                                                LastName = LastNameTextBox.Text,
-                                                                                FirstName = FirstNameTextBox.Text,
-                                                                                MiddleName = MiddleNameTextBox.Text,
-                                                                                Gender = GenderComboBox.Text,
-                                                                                PhoneNumber = PhoneTextBox.Text,
-                                                                                Email = EmailTextBox.Text,
-                                                                                INN = InnTextBox.Text,
-                                                                                Snils = SnilsTextBox.Text,
-                                                                                DateOfBirth = DateOfBirthDatePicker.SelectedDate,
-                                                                                IdAddress = CurrentAddress.Id,
-                                                                                IdPassport = CurrentPassport.Id,
-                                                                                IdRole = 1,
-                                                                            };
-                                                                            AppData.Context.Staff.Add(CurrentStaff);
-                                                                            MessageBox.Show("Сотрудник успешно зарегистрирован!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                                                MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                                                LoginTextBox.Focus();
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            CurrentStaff.Login = LoginTextBox.Text;
+                                                                            CurrentStaff.Password = PasswordTextBox.Password;
+                                                                            CurrentStaff.LastName = LastNameTextBox.Text;
+                                                                            CurrentStaff.FirstName = FirstNameTextBox.Text;
+                                                                            CurrentStaff.MiddleName = MiddleNameTextBox.Text;
+                                                                            CurrentStaff.Gender = GenderComboBox.Text;
+                                                                            CurrentStaff.PhoneNumber = PhoneTextBox.Text;
+                                                                            CurrentStaff.Email = EmailTextBox.Text;
+                                                                            CurrentStaff.DateOfBirth = DateOfBirthDatePicker.SelectedDate;
+                                                                            CurrentStaff.INN = InnTextBox.Text;
+                                                                            CurrentStaff.Snils = SnilsTextBox.Text;
+
+                                                                            Address CurrentAddress = AppData.Context.Address.Where(c => c.Id == CurrentStaff.IdAddress).FirstOrDefault();
+                                                                            CurrentAddress.Region = AreaTextBox.Text;
+                                                                            CurrentAddress.City = CityTextBox.Text;
+                                                                            CurrentAddress.Street = StreetTextBox.Text;
+                                                                            CurrentAddress.House = HouseTextBox.Text;
+                                                                            CurrentAddress.Apartment = ApartmentTextBox.Text;
+
+                                                                            Passport CurrentPassport = AppData.Context.Passport.Where(c => c.Id == CurrentStaff.IdPassport).FirstOrDefault();
+                                                                            CurrentPassport.Serial = PassportTextBox.Text.Remove(5, 7);
+                                                                            CurrentPassport.Number = PassportTextBox.Text.Remove(0, 6);
+                                                                            CurrentPassport.DateOfIssue = DateOfIssueDatePicker.SelectedDate;
+                                                                            CurrentPassport.IssuedByWhom = IssuedByWhomTextBox.Text;
+                                                                            MessageBox.Show("Информация обновлена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
                                                                             AppData.Context.SaveChanges();
                                                                             NavigationService.GoBack();
-                                                                        } else
-                                                                        {
-                                                                            MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                                            LoginTextBox.Focus();
                                                                         }
-                                                                    } else
+                                                                    }
+                                                                    else
                                                                     {
-                                                                        CurrentStaff.Login = LoginTextBox.Text;
-                                                                        CurrentStaff.Password = PasswordTextBox.Password;
-                                                                        CurrentStaff.LastName = LastNameTextBox.Text;
-                                                                        CurrentStaff.FirstName = FirstNameTextBox.Text;
-                                                                        CurrentStaff.MiddleName = MiddleNameTextBox.Text;
-                                                                        CurrentStaff.Gender = GenderComboBox.Text;
-                                                                        CurrentStaff.PhoneNumber = PhoneTextBox.Text;
-                                                                        CurrentStaff.Email = EmailTextBox.Text;
-                                                                        CurrentStaff.DateOfBirth = DateOfBirthDatePicker.SelectedDate;
-                                                                        CurrentStaff.INN = InnTextBox.Text;
-                                                                        CurrentStaff.Snils = SnilsTextBox.Text;
-
-                                                                        Address CurrentAddress = AppData.Context.Address.Where(c => c.Id == CurrentStaff.IdAddress).FirstOrDefault();
-                                                                        CurrentAddress.Region = AreaTextBox.Text;
-                                                                        CurrentAddress.City = CityTextBox.Text;
-                                                                        CurrentAddress.Street = StreetTextBox.Text;
-                                                                        CurrentAddress.House = HouseTextBox.Text;
-                                                                        CurrentAddress.Apartment = ApartmentTextBox.Text;
-
-                                                                        Passport CurrentPassport = AppData.Context.Passport.Where(c => c.Id == CurrentStaff.IdPassport).FirstOrDefault();
-                                                                        CurrentPassport.Serial = PassportTextBox.Text.Remove(5, 7);
-                                                                        CurrentPassport.Number = PassportTextBox.Text.Remove(0, 6);
-                                                                        CurrentPassport.DateOfIssue = DateOfIssueDatePicker.SelectedDate;
-                                                                        CurrentPassport.IssuedByWhom = IssuedByWhomTextBox.Text;
-                                                                        MessageBox.Show("Информация обновлена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                                        AppData.Context.SaveChanges();
-                                                                        NavigationService.GoBack();
+                                                                        MessageBox.Show("Дата рождения указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                                        DateOfBirthDatePicker.Focus();
                                                                     }
                                                                 }
                                                                 else
                                                                 {
-                                                                    MessageBox.Show("Дата рождения указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                                    DateOfBirthDatePicker.Focus();
+                                                                    MessageBox.Show("Дата выдачи паспорта указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                                    DateOfIssueDatePicker.Focus();
                                                                 }
                                                             }
                                                             else
                                                             {
-                                                                MessageBox.Show("Дата выдачи паспорта указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                                DateOfIssueDatePicker.Focus();
+                                                                MessageBox.Show("Серия и номер паспорта указаны некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                                PassportTextBox.Focus();
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Серия и номер паспорта указаны некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                            PassportTextBox.Focus();
+                                                            MessageBox.Show("Город указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                            CityTextBox.Focus();
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        MessageBox.Show("Город указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                        CityTextBox.Focus();
+                                                        MessageBox.Show("Область указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                        AreaTextBox.Focus();
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    MessageBox.Show("Область указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                    AreaTextBox.Focus();
+                                                    MessageBox.Show("СНИЛС указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                    SnilsTextBox.Focus();
                                                 }
                                             }
                                             else
                                             {
-                                                MessageBox.Show("СНИЛС указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                SnilsTextBox.Focus();
+                                                MessageBox.Show("ИНН указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                InnTextBox.Focus();
                                             }
+
                                         }
                                         else
                                         {
-                                            MessageBox.Show("ИНН указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                            InnTextBox.Focus();
+                                            MessageBox.Show("E-Mail адрес указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            EmailTextBox.Focus();
                                         }
                                     }
                                     else
@@ -251,6 +267,16 @@ namespace Warehouse.Pages
             else
             {
                 MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image | *.jpg;*.png;";
+            if (ofd.ShowDialog() == true)
+            {
+                StaffImage.Source = new BitmapImage(new Uri(ofd.FileName));
             }
         }
     }

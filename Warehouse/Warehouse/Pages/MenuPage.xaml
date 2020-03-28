@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Warehouse.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
-      Title="MenuPage">
+      Title="Главное меню">
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -17,13 +17,15 @@
                         Click="StaffButton_Click" />
                 <Button x:Name="OrganizationButton" 
                         Content="Организации"
-                        Margin="5"/>
+                        Margin="5"
+                        Click="OrganizationButton_Click" />
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="GoodsButton"
                         Margin="5"
-                        Content="Товары" />
+                        Content="Товары"
+                        Click="GoodsButton_Click" />
                 <Button x:Name="ManufacturerButton"
                         Content="Производители"
                         Margin="5" />

@@ -17,12 +17,15 @@ namespace Warehouse.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeOrganization()
         {
+            this.Manufacturer = new HashSet<Manufacturer>();
             this.Organization = new HashSet<Organization>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manufacturer> Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Organization> Organization { get; set; }
     }

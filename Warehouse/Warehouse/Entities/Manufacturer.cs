@@ -21,11 +21,13 @@ namespace Warehouse.Entities
         }
     
         public int Id { get; set; }
+        public string IdTypeOrg { get; set; }
         public string Name { get; set; }
         public string CodeCountry { get; set; }
     
         public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Good> Good { get; set; }
+        public virtual TypeOrganization TypeOrganization { get; set; }
     }
 }

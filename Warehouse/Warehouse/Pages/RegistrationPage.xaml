@@ -10,203 +10,243 @@
       Title="Регистрация">
 
     <Grid>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-            <StackPanel Orientation="Vertical"
-                        Margin="5">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Логин"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <TextBox x:Name="LoginTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Пароль"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <PasswordBox x:Name="PasswordTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Повторите пароль"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <PasswordBox x:Name="RePasswordTextBox"
-                                 Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Фамилия"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <TextBox x:Name="LastNameTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Имя"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <TextBox x:Name="FirstNameTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Отчество"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <TextBox x:Name="MiddleNameTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Пол"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <ComboBox x:Name="GenderComboBox"
-                             Margin="5">
-                        <TextBlock Text="Мужской" 
-                                   Style="{StaticResource OtherTextBlock}" />
-                        <TextBlock Text="Женский"
-                                   Style="{StaticResource OtherTextBlock}" />
-                    </ComboBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Номер телефона"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <xctk:MaskedTextBox x:Name="PhoneTextBox"
-                                        Mask="+7 (000) 000-00-00"
-                                        Margin="5"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="E-Mail"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <TextBox x:Name="EmailTextBox"
-                             Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Дата рождения"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <DatePicker x:Name="DateOfBirthDatePicker"
-                                Margin="5" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="ИНН"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <xctk:MaskedTextBox x:Name="InnTextBox"
-                                        Margin="5" 
-                                        Mask="000000000000"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="СНИЛС"
-                               Margin="5"
-                               Style="{StaticResource OtherTextBlock}" />
-                    <xctk:MaskedTextBox x:Name="SnilsTextBox"
-                                        Margin="5"
-                                        Mask="000-000-000 00"/>
-                </StackPanel>
-
-            </StackPanel>
-            <StackPanel Orientation="Vertical"
-                        Margin="5">
-                <GroupBox Header="Адрес"
-                          Margin="5">
-                    <StackPanel Orientation="Vertical">
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Область"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <TextBox x:Name="AreaTextBox"
-                                     Margin="5" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Город"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <TextBox x:Name="CityTextBox"
-                                     Margin="5" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Улица"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <TextBox x:Name="StreetTextBox"
-                                     Margin="5" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Дом"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <TextBox x:Name="HouseTextBox"
-                                     Margin="5" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Кваритра*"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <TextBox x:Name="ApartmentTextBox"
-                                     Margin="5" />
-                        </StackPanel>
-
+        <TabControl x:Name="StaffTabControl"
+                    Background="#0000">
+            <TabItem x:Name="MainTabItem">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Основное</TextBlock>
                     </StackPanel>
-                </GroupBox>
-                
-                <GroupBox Header="Паспорт"
-                          Margin="5">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Серия и номер"
-                                       Style="{StaticResource OtherTextBlock}"
-                                       Margin="5" />
-                            <xctk:MaskedTextBox x:Name="PassportTextBox"
-                                                Margin="5"
-                                                Mask="00 00 000000" />
-                        </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical"
+                                    Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Логин"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <TextBox x:Name="LoginTextBox"
+                                         Margin="5" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Дата выдачи"
-                                       Margin="5"
-                                       Style="{StaticResource OtherTextBlock}" />
-                            <DatePicker x:Name="DateOfIssueDatePicker"
-                                        Margin="5" />
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Пароль"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <PasswordBox x:Name="PasswordTextBox"
+                                             Margin="5" />
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Кем выдан"
-                                       VerticalAlignment="Top"
-                                       Style="{StaticResource OtherTextBlock}"
-                                       Margin="5" />
-                            <TextBox x:Name="IssuedByWhomTextBox"
-                                     Margin="5"
-                                     AcceptsReturn="True"
-                                     VerticalScrollBarVisibility="Auto"
-                                     TextWrapping="Wrap"
-                                     Height="100"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Повторите пароль"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <PasswordBox x:Name="RePasswordTextBox"
+                                             Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Фамилия"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <TextBox x:Name="LastNameTextBox"
+                                         Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Имя"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <TextBox x:Name="FirstNameTextBox"
+                                         Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Отчество"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <TextBox x:Name="MiddleNameTextBox"
+                                         Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Пол"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <ComboBox x:Name="GenderComboBox"
+                                          Margin="5">
+                                    <TextBlock Text="Мужской"
+                                               Style="{StaticResource OtherTextBlock}" />
+                                    <TextBlock Text="Женский"
+                                               Style="{StaticResource OtherTextBlock}" />
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Номер телефона"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <xctk:MaskedTextBox x:Name="PhoneTextBox"
+                                                    Mask="+7 (000) 000-00-00"
+                                                    Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="E-Mail"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <TextBox x:Name="EmailTextBox"
+                                         Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата рождения"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <DatePicker x:Name="DateOfBirthDatePicker"
+                                            Margin="5" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="ИНН"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <xctk:MaskedTextBox x:Name="InnTextBox"
+                                                    Margin="5"
+                                                    Mask="000000000000" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="СНИЛС"
+                                           Margin="5"
+                                           Style="{StaticResource OtherTextBlock}" />
+                                <xctk:MaskedTextBox x:Name="SnilsTextBox"
+                                                    Margin="5"
+                                                    Mask="000-000-000 00" />
+                            </StackPanel>
                         </StackPanel>
-                        
+                        <StackPanel Orientation="Vertical"
+                                    Margin="5">
+                            <GroupBox Header="Адрес"
+                                      Margin="5">
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Область"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="AreaTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Город"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="CityTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Улица"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="StreetTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дом"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="HouseTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Кваритра*"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="ApartmentTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Паспорт"
+                                      Margin="5">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Серия и номер"
+                                                   Style="{StaticResource OtherTextBlock}"
+                                                   Margin="5" />
+                                        <xctk:MaskedTextBox x:Name="PassportTextBox"
+                                                            Margin="5"
+                                                            Mask="00 00 000000" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дата выдачи"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <DatePicker x:Name="DateOfIssueDatePicker"
+                                                    Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Кем выдан"
+                                                   VerticalAlignment="Top"
+                                                   Style="{StaticResource OtherTextBlock}"
+                                                   Margin="5" />
+                                        <TextBox x:Name="IssuedByWhomTextBox"
+                                                 Margin="5"
+                                                 AcceptsReturn="True"
+                                                 VerticalScrollBarVisibility="Auto"
+                                                 TextWrapping="Wrap"
+                                                 Height="100" />
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
                     </StackPanel>
-                </GroupBox>
-            </StackPanel>
-            
-        </StackPanel>
+
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="SecondTabItem">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Изображение сотрудника</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Orientation="Vertical"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Изображение"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource OtherTextBlock}" />
+                        <Border BorderBrush="#1f1f1f"
+                                BorderThickness="2"
+                                Height="300"
+                                Width="300">
+                            <Image x:Name="StaffImage"
+                                   Margin="5"
+                                   Height="300" />
+                        </Border>
+                        <Button x:Name="AddImage"
+                                Margin="5"
+                                Content="Добавить изображения"
+                                Click="AddImage_Click" />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"

@@ -90,6 +90,7 @@
     <Compile Include="Entities\Address.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\AddressOrgPartial.cs" />
     <Compile Include="Entities\AppData.cs" />
     <Compile Include="Entities\Country.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -115,6 +116,7 @@
     <Compile Include="Entities\DocumentGood.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\FullnameDirector.cs" />
     <Compile Include="Entities\FullnameStaffPartial.cs" />
     <Compile Include="Entities\Good.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -125,6 +127,8 @@
     <Compile Include="Entities\Manufacturer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\NameManPartial.cs" />
+    <Compile Include="Entities\NameOrgPartial.cs" />
     <Compile Include="Entities\Organization.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -166,7 +170,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditOrganization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GoodsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OrganizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,8 +199,17 @@
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditOrganization.xaml.cs">
+      <DependentUpon>EditOrganization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GoodsPage.xaml.cs">
+      <DependentUpon>GoodsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrganizationPage.xaml.cs">
+      <DependentUpon>OrganizationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -241,6 +266,7 @@
       <DependentUpon>DataBase.edmx</DependentUpon>
       <LastGenOutput>DataBase.cs</LastGenOutput>
     </Content>
+    <Resource Include="Source\noimage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

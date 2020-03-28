@@ -28,6 +28,7 @@ namespace Warehouse.Entities
         public string Name { get; set; }
         public string OGRN { get; set; }
         public string INN { get; set; }
+        public string Email { get; set; }
         public Nullable<System.DateTime> DateRegistration { get; set; }
         public string PhoneNumber { get; set; }
         public string LastName { get; set; }

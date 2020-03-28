@@ -16,28 +16,23 @@ using System.Windows.Shapes;
 namespace Warehouse.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MenuPage.xaml
+    /// Логика взаимодействия для GoodsPage.xaml
     /// </summary>
-    public partial class MenuPage : Page
+    public partial class GoodsPage : Page
     {
-        public MenuPage()
+        public GoodsPage()
         {
             InitializeComponent();
         }
 
-        private void StaffButton_Click(object sender, RoutedEventArgs e)
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            NavigationService.Navigate(new StaffPage());
+
         }
 
-        private void OrganizationButton_Click(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new OrganizationPage());
-        }
 
-        private void GoodsButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new GoodsPage());
         }
     }
 }
