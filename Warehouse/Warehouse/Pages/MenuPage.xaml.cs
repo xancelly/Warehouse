@@ -39,5 +39,15 @@ namespace Warehouse.Pages
         {
             NavigationService.Navigate(new GoodsPage());
         }
+
+        private void WarehouseButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReceiptInvoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditReceiptInvoicePage());
+        }
     }
 }

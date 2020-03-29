@@ -1,0 +1,493 @@
+﻿<Page x:Class="Warehouse.Pages.EditReceiptInvoicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Warehouse.Pages"
+      mc:Ignorable="d"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="Редактирование накладной">
+
+    <Grid>
+        <TabControl x:Name="StaffTabControl"
+                    Background="#0000">
+            <TabItem x:Name="AboutOrgTabItem"
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Об организации</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+                        
+                        <StackPanel Orientation="Vertical">
+                            <GroupBox Header="Отправитель"
+                                      Margin="5, 0, 0, 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Деятельность"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <ComboBox x:Name="SenTypeOrgComboBox"
+                                                  DisplayMemberPath="Id"
+                                                  Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Наименование"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenNameTextBox"
+                                                 TextChanged="SenNameTextBox_TextChanged"
+                                                 Margin="5" 
+                                                 LostFocus="SenNameTextBox_LostFocus"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дата регистрации"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <DatePicker x:Name="SenDateRegDatePicker"
+                                                    Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Контактный номер"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="SenPhoneNumberTextBox"
+                                                            Mask="+7 (000) 000-00-00"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="E-Mail"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenEmailTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ИНН"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="SenInnTextBox"
+                                                            Mask="0000000000"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ОГРН"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="SenOgrnTextBox"
+                                                            Mask="0000000000000"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ФИО владельца"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenFIOTextBox"
+                                                 Margin="5, 5, 5, 5" />
+                                    </StackPanel>
+                                    <GroupBox Header="Адрес">
+                                        <StackPanel Orientation="Vertical">
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Область"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="SenAreaTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Город"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="SenCityTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Улица"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="SenStreetTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Дом"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="SenHouseTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"
+                                    Margin="5, 0, 0, 0">
+                            <GroupBox Header="Получатель"
+                                      Margin="5, 0, 0, 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Деятельность"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <ComboBox x:Name="RecTypeOrgComboBox"
+                                                  DisplayMemberPath="Id"
+                                                  Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Наименование"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecNameTextBox"
+                                                 LostFocus="RecNameTextBox_LostFocus"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дата регистрации"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <DatePicker x:Name="RecDateRegDatePicker"
+                                                    Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Контактный номер"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="RecPhoneNumberTextBox"
+                                                            Mask="+7 (000) 000-00-00"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="E-Mail"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecEmailTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ИНН"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="RecInnTextBox"
+                                                            Mask="0000000000"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ОГРН"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <xctk:MaskedTextBox x:Name="RecOgrnTextBox"
+                                                            Mask="0000000000000"
+                                                            Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ФИО владельца"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecFIOTextBox"
+                                                 Margin="5, 5, 5, 5" />
+                                    </StackPanel>
+                                    <GroupBox Header="Адрес">
+                                        <StackPanel Orientation="Vertical">
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Область"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="RecAreaTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Город"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="RecCityTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Улица"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="RecStreetTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Дом"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="RecHouseTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            
+            <TabItem x:Name="AboutWarTabItem"
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">О доставке</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+
+                        <StackPanel Orientation="Vertical">
+                            <GroupBox Header="Адрес склада отправителя"
+                                      Margin="5, 0, 0, 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Область"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenWarAreaTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Город"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenWarCityTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Улица"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenWarStreetTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дом"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="SenWarHouseTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <GroupBox Header="Адрес склада получателя"
+                                      Margin="5, 0, 0, 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Область"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecWarAreaTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Город"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecWarCityTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Улица"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecWarStreetTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дом"
+                                                   Margin="5"
+                                                   Style="{StaticResource OtherTextBlock}" />
+                                        <TextBox x:Name="RecWarHouseTextBox"
+                                                 Margin="5" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem x:Name="AboutGoodsTabItem"
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">О товарах</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <DockPanel Margin="5"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <GroupBox Header="Товар в накладной"
+                                      Margin="5, 0, 0, 0">
+                                <StackPanel Orientation="Vertical">
+                                    <GroupBox Header="Производитель">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Деятельность"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <ComboBox x:Name="TypeOrgComboBox"
+                                                          DisplayMemberPath="Id"
+                                                          Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Наименование"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="NameManTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Страна производства"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <ComboBox x:Name="CountryComboBox"
+                                                          DisplayMemberPath="Name"
+                                                          Margin="5" />
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </GroupBox>
+
+                                    <GroupBox Header="Описание товара">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Группа товаров"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <ComboBox x:Name="GroupGoodComboBox"
+                                                          Margin="5"
+                                                          DisplayMemberPath="Name" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Наименование"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="NameTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Единица измерения"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <ComboBox x:Name="UnitComboBox"
+                                                          DisplayMemberPath="Designation"
+                                                          Margin="5" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Срок годности"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <DatePicker x:Name="ShelfLifeDatePicker"
+                                                            Margin="5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+
+                                    <GroupBox Header="Дополнительная информация">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Количество"
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="CountTextBox"
+                                                          Margin="5"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Стоимость за ед."
+                                                           Margin="5"
+                                                           Style="{StaticResource OtherTextBlock}" />
+                                                <TextBox x:Name="PriceTextBox"
+                                                         Margin="5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+
+                                    <Button x:Name="AddGoodButton"
+                                            Width="250"
+                                            Margin="5"
+                                            Content="Добавить товар в список"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <DockPanel Margin="5, 0, 0, 0">
+                            <GroupBox Header="Список товаров в накладной">
+                                <DataGrid AutoGenerateColumns="False"
+                                          CanUserAddRows="False"
+                                          x:Name="GoodsDataGrid"
+                                          IsReadOnly="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Производитель"
+                                                            Width="*"/>
+                                        <DataGridTextColumn Header="Наименование"
+                                                            Width="*" />
+                                        <DataGridTextColumn Header="Ед. изм."
+                                                            Width="*" />
+                                        <DataGridTextColumn Header="Количество"
+                                                            Width="*" />
+                                        <DataGridTextColumn Header="Стоимость за ед."
+                                                            Width="*" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </GroupBox>
+                        </DockPanel>
+
+                    </DockPanel>
+                </TabItem.Content>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Page>

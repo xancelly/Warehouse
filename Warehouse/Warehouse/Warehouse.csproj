@@ -91,6 +91,7 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\AddressOrgPartial.cs" />
+    <Compile Include="Entities\AddressWarPartial.cs" />
     <Compile Include="Entities\AppData.cs" />
     <Compile Include="Entities\Country.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -170,6 +171,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditReceiptInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReceiptInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EditGoodsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,10 +207,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WarehousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditReceiptInvoicePage.xaml.cs">
+      <DependentUpon>EditReceiptInvoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ReceiptInvoicePage.xaml.cs">
+      <DependentUpon>ReceiptInvoicePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EditGoodsPage.xaml.cs">
       <DependentUpon>EditGoodsPage.xaml</DependentUpon>
@@ -223,6 +242,9 @@
     </Compile>
     <Compile Include="Pages\StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WarehousePage.xaml.cs">
+      <DependentUpon>WarehousePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

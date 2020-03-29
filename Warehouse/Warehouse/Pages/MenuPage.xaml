@@ -34,16 +34,18 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="WarehouseButton"
                         Margin="5"
-                        Content="Склад" />
+                        Content="Склад"
+                        Click="WarehouseButton_Click" />
                 <Button x:Name="DocumentButton"
                         Content="Документы"
-                        Margin="5" />
+                        Margin="5"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ReceipetInvoiceButton"
+                <Button x:Name="ReceiptInvoiceButton"
                         Margin="5"
-                        Content="Приходные накладные" />
+                        Content="Приходные накладные"
+                        Click="ReceiptInvoiceButton_Click" />
                 <Button x:Name="ExpenceInvoiceButton"
                         Content="Расходные накладные"
                         Margin="5" />
