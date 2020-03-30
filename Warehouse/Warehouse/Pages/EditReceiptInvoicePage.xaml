@@ -5,12 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Warehouse.Pages"
       mc:Ignorable="d"
+      Unloaded="Page_Unloaded"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="Редактирование накладной">
 
     <Grid>
-        <TabControl x:Name="StaffTabControl"
+        <TabControl x:Name="InvoiceTabControl"
                     Background="#0000">
             <TabItem x:Name="AboutOrgTabItem"
                      Height="30">
@@ -43,7 +44,6 @@
                                                    Margin="5"
                                                    Style="{StaticResource OtherTextBlock}" />
                                         <TextBox x:Name="SenNameTextBox"
-                                                 TextChanged="SenNameTextBox_TextChanged"
                                                  Margin="5" 
                                                  LostFocus="SenNameTextBox_LostFocus"/>
                                     </StackPanel>
@@ -359,8 +359,8 @@
                 </TabItem.Header>
                 <TabItem.Content>
                     <DockPanel Margin="5"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Center">
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center">
                         <StackPanel Orientation="Vertical">
                             <GroupBox Header="Товар в накладной"
                                       Margin="5, 0, 0, 0">
@@ -441,7 +441,7 @@
                                                            Margin="5"
                                                            Style="{StaticResource OtherTextBlock}" />
                                                 <TextBox x:Name="CountTextBox"
-                                                          Margin="5"/>
+                                                         Margin="5" />
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
@@ -457,12 +457,19 @@
                                     <Button x:Name="AddGoodButton"
                                             Width="250"
                                             Margin="5"
-                                            Content="Добавить товар в список"/>
+                                            Content="Добавить товар в список"
+                                            Click="AddGoodButton_Click" />
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>
 
                         <DockPanel Margin="5, 0, 0, 0">
+                            <Button Content="Создать накладную"
+                                    DockPanel.Dock="Bottom"
+                                    HorizontalAlignment="Right"
+                                    Margin="5"
+                                    x:Name="SaveButton"
+                                    Click="SaveButton_Click" />
                             <GroupBox Header="Список товаров в накладной">
                                 <DataGrid AutoGenerateColumns="False"
                                           CanUserAddRows="False"
@@ -470,24 +477,27 @@
                                           IsReadOnly="True">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Производитель"
-                                                            Width="*"/>
+                                                            Width="*" 
+                                                            Binding="{Binding IdGood.NameMan}"/>
                                         <DataGridTextColumn Header="Наименование"
-                                                            Width="*" />
+                                                            Width="*"
+                                                            Binding="{Binding IdGood.Name}" />
                                         <DataGridTextColumn Header="Ед. изм."
-                                                            Width="*" />
+                                                            Width="*"
+                                                            Binding="{Binding IdGood.IdUnit}" />
                                         <DataGridTextColumn Header="Количество"
-                                                            Width="*" />
+                                                            Width="*"
+                                                            Binding="{Binding Count}" />
                                         <DataGridTextColumn Header="Стоимость за ед."
-                                                            Width="*" />
+                                                            Width="*"
+                                                            Binding="{Binding Price}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
                         </DockPanel>
-
                     </DockPanel>
                 </TabItem.Content>
             </TabItem>
-            
         </TabControl>
     </Grid>
 </Page>

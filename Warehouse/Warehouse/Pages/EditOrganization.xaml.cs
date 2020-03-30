@@ -204,7 +204,7 @@ namespace Warehouse.Pages
                 else
                 {
                     MessageBox.Show("Фамилия указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    MiddleNameTextBox.Focus();
+                    LastNameTextBox.Focus();
                 }
             }
             else
