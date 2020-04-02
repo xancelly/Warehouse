@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Warehouse.Entities;
 
 namespace Warehouse.Pages
 {
@@ -23,6 +24,19 @@ namespace Warehouse.Pages
         public WarehousePage()
         {
             InitializeComponent();
+            WarehouseDataGrid.ItemsSource = AppData.Context.WarehouseGood.Where(c => c.Warehouse.Organization.Name.ToLower().Contains("ТТЛ".ToLower())).ToList();
+        }
+
+        public void UpdateWarehouse()
+        {
+            var CurrentWarehouse = AppData.Context.WarehouseGood.ToList();
+            CurrentWarehouse = CurrentWarehouse.Where(c => c.Warehouse.Organization.Name.ToLower().Contains("ТТЛ".ToLower()) && c.Party.Name.ToLower().Contains(SearchTextBox.Text.ToLower())).ToList();
+            WarehouseDataGrid.ItemsSource = CurrentWarehouse;
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateWarehouse();
         }
     }
 }

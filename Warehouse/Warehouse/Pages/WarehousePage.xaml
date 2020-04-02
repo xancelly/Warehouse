@@ -6,9 +6,42 @@
       xmlns:local="clr-namespace:Warehouse.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
-      Title="WarehousePage">
+      Title="Склад">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Поиск"
+                       Style="{StaticResource OtherTextBlock}" />
+            <TextBox x:Name="SearchTextBox"
+                     TextChanged="SearchTextBox_TextChanged"/>
+
+        </StackPanel>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  x:Name="WarehouseDataGrid"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ партии"
+                                    Width="*"
+                                    Binding="{Binding Party.Id}" />
+                <DataGridTextColumn Header="Наименование"
+                                    Width="*"
+                                    Binding="{Binding Party.Name}" />
+                <DataGridTextColumn Header="Количество"
+                                    Width="*"
+                                    Binding="{Binding Party.Count}" />
+                <DataGridTextColumn Header="Дата производства"
+                                    Width="*"
+                                    Binding="{Binding Party.DateProduction}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

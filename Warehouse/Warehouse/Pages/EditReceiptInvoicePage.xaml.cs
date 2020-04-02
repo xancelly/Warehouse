@@ -26,6 +26,8 @@ namespace Warehouse.Pages
         Organization RecCurrentOrganization = null;
         DocumentGood CurrentDocumentGood = null;
         Document CurrentDocument = null;
+        Party CurrentParty = null;
+        WarehouseGood CurrentWarehouseGood = null;
         Entities.Warehouse SenCurrentWarehouse = null;
         Entities.Warehouse RecCurrentWarehouse = null;
         Manufacturer CurrentManufacturer = null;
@@ -39,6 +41,7 @@ namespace Warehouse.Pages
             CountryComboBox.ItemsSource = AppData.Context.Country.ToList();
             GroupGoodComboBox.ItemsSource = AppData.Context.GroupGood.ToList();
             UnitComboBox.ItemsSource = AppData.Context.Unit.ToList();
+
             CurrentDocument = new Document()
             {
                 IdRecipient = null,
@@ -51,6 +54,30 @@ namespace Warehouse.Pages
             AppData.Context.Document.Add(CurrentDocument);
             AppData.Context.SaveChanges();
             Properties.Settings.Default.IdDocument = CurrentDocument.Id;
+
+            RecCurrentOrganization = AppData.Context.Organization.Where(c => c.Name.ToLower().Contains("ТТЛ".ToLower())).FirstOrDefault();
+
+            RecTypeOrgComboBox.SelectedItem = RecCurrentOrganization.TypeOrganization;
+            RecNameTextBox.Text = RecCurrentOrganization.Name;
+            RecDateRegDatePicker.SelectedDate = RecCurrentOrganization.DateRegistration;
+            RecPhoneNumberTextBox.Text = RecCurrentOrganization.PhoneNumber;
+            RecEmailTextBox.Text = RecCurrentOrganization.Email;
+            RecInnTextBox.Text = RecCurrentOrganization.INN;
+            RecOgrnTextBox.Text = RecCurrentOrganization.OGRN;
+            RecFIOTextBox.Text = RecCurrentOrganization.FullnameDirector;
+            RecAreaTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.Region).FirstOrDefault();
+            RecCityTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.City).FirstOrDefault();
+            RecStreetTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.Street).FirstOrDefault();
+            RecHouseTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.House).FirstOrDefault();
+
+            RecCurrentWarehouse = AppData.Context.Warehouse.Where(c => c.IdOrganization == RecCurrentOrganization.Id).FirstOrDefault();
+
+            RecWarAreaTextBox.Text = RecCurrentWarehouse.Address.Region;
+            RecWarCityTextBox.Text = RecCurrentWarehouse.Address.City;
+            RecWarStreetTextBox.Text = RecCurrentWarehouse.Address.Street;
+            RecWarHouseTextBox.Text = RecCurrentWarehouse.Address.House;
+
+
         }
 
         private void SenNameTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -79,26 +106,6 @@ namespace Warehouse.Pages
 
         private void RecNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            RecCurrentOrganization = AppData.Context.Organization.Where(c => c.Name.ToLower().Contains(RecNameTextBox.Text.ToLower())).FirstOrDefault();
-            if (RecCurrentOrganization != null)
-            {
-                if (MessageBox.Show("Организация с таким названием уже есть в базе.\nЖелаете воспользоваться автозаполнением?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    RecTypeOrgComboBox.SelectedItem = RecCurrentOrganization.TypeOrganization;
-                    RecNameTextBox.Text = RecCurrentOrganization.Name;
-                    RecDateRegDatePicker.SelectedDate = RecCurrentOrganization.DateRegistration;
-                    RecPhoneNumberTextBox.Text = RecCurrentOrganization.PhoneNumber;
-                    RecEmailTextBox.Text = RecCurrentOrganization.Email;
-                    RecInnTextBox.Text = RecCurrentOrganization.INN;
-                    RecOgrnTextBox.Text = RecCurrentOrganization.OGRN;
-                    RecFIOTextBox.Text = RecCurrentOrganization.FullnameDirector;
-
-                    RecAreaTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.Region).FirstOrDefault();
-                    RecCityTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.City).FirstOrDefault();
-                    RecStreetTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.Street).FirstOrDefault();
-                    RecHouseTextBox.Text = AppData.Context.Address.Where(c => c.Id == RecCurrentOrganization.IdAddress).Select(c => c.House).FirstOrDefault();
-                }
-            }
         }
 
         private void AddGoodButton_Click(object sender, RoutedEventArgs e)
@@ -118,11 +125,6 @@ namespace Warehouse.Pages
                     };
                     AppData.Context.Manufacturer.Add(CurrentManufacturer);
                     AppData.Context.SaveChanges();
-                    Properties.Settings.Default.IdManufacturer = CurrentManufacturer.Id;
-                }
-                else
-                {
-                    Properties.Settings.Default.IdManufacturer = CurrentManufacturer.Id;
                 }
                 if (CountTextBox.Text.IndexOfAny(letterList.ToCharArray()) <= -1)
                 {
@@ -131,7 +133,7 @@ namespace Warehouse.Pages
                         CurrentGood = new Good()
                         {
                             Name = NameTextBox.Text,
-                            IdManufacturer = Properties.Settings.Default.IdManufacturer,
+                            IdManufacturer = CurrentManufacturer.Id,
                             GroupGood = GroupGoodComboBox.SelectedItem as GroupGood,
                             Unit = UnitComboBox.SelectedItem as Unit,
                             ShelfLife = ShelfLifeDatePicker.SelectedDate,
@@ -150,6 +152,24 @@ namespace Warehouse.Pages
                         AppData.Context.SaveChanges();
 
                         GoodsDataGrid.ItemsSource = AppData.Context.DocumentGood.Where(c => c.IdDocument == CurrentDocument.Id).ToList();
+
+                        CurrentParty = new Party()
+                        {
+                            Name = "Партия '" + CurrentGood.Name + "'",
+                            IdGood = CurrentGood.Id,
+                            Count = CurrentDocumentGood.Count,
+                            DateProduction = DateTime.Today,
+                        };
+                        AppData.Context.Party.Add(CurrentParty);
+                        AppData.Context.SaveChanges();
+
+                        CurrentWarehouseGood = new WarehouseGood()
+                        {
+                            IdWarehouse = RecCurrentWarehouse.Id,
+                            IdParty = CurrentParty.Id,
+                        };
+                        AppData.Context.WarehouseGood.Add(CurrentWarehouseGood);
+                        AppData.Context.SaveChanges();
                     } else
                     {
                         MessageBox.Show("Стоимость товара введена некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -275,115 +295,6 @@ namespace Warehouse.Pages
                 }
             }
 
-            //Если огранизация получателя отсутствует, то сохранение в базу
-            RecCurrentOrganization = AppData.Context.Organization.Where(c => c.Name.ToLower().Contains(RecNameTextBox.Text.ToLower())).FirstOrDefault();
-            if (RecCurrentOrganization == null)
-            {
-                string letterList = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnoprstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-                string numList = "1234567890";
-                if (RecTypeOrgComboBox.SelectedItem != null && !String.IsNullOrWhiteSpace(RecNameTextBox.Text) && RecDateRegDatePicker.SelectedDate != null && !String.IsNullOrWhiteSpace(RecPhoneNumberTextBox.Text) && !String.IsNullOrWhiteSpace(RecEmailTextBox.Text) && !String.IsNullOrWhiteSpace(RecInnTextBox.Text) && !String.IsNullOrWhiteSpace(RecOgrnTextBox.Text) && !String.IsNullOrWhiteSpace(RecFIOTextBox.Text) && !String.IsNullOrWhiteSpace(RecAreaTextBox.Text) && !String.IsNullOrWhiteSpace(RecCityTextBox.Text) && !String.IsNullOrWhiteSpace(RecStreetTextBox.Text) && !String.IsNullOrWhiteSpace(RecHouseTextBox.Text))
-                {
-                    if (RecFIOTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
-                    {
-                        if (RecPhoneNumberTextBox.Text.Length == 18 && (RecPhoneNumberTextBox.Text.IndexOfAny(letterList.ToCharArray()) <= -1))
-                        {
-                            if (new EmailAddressAttribute().IsValid(RecEmailTextBox.Text))
-                            {
-                                if (RecInnTextBox.Text.Length == 10 && !RecInnTextBox.Text.Contains('_'))
-                                {
-                                    if (RecOgrnTextBox.Text.Length == 13 && !RecOgrnTextBox.Text.Contains('_'))
-                                    {
-                                        if (RecDateRegDatePicker.SelectedDate < DateTime.Today)
-                                        {
-                                            if (RecAreaTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
-                                            {
-                                                if (RecCityTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
-                                                {
-                                                    Address RecCurrentAddress = new Address()
-                                                    {
-                                                        CodeCountry = "RU",
-                                                        Region = RecAreaTextBox.Text,
-                                                        City = RecCityTextBox.Text,
-                                                        Street = RecStreetTextBox.Text,
-                                                        House = RecHouseTextBox.Text,
-                                                    };
-                                                    AppData.Context.Address.Add(RecCurrentAddress);
-
-                                                    String[] FullNameRec = RecFIOTextBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                                                    RecCurrentOrganization = new Organization()
-                                                    {
-                                                        TypeOrganization = RecTypeOrgComboBox.SelectedItem as TypeOrganization,
-                                                        Name = RecNameTextBox.Text,
-                                                        DateRegistration = RecDateRegDatePicker.SelectedDate,
-                                                        PhoneNumber = RecPhoneNumberTextBox.Text,
-                                                        Email = RecEmailTextBox.Text,
-                                                        INN = RecInnTextBox.Text,
-                                                        OGRN = RecOgrnTextBox.Text,
-                                                        LastName = FullNameRec[0],
-                                                        FirstName = FullNameRec[1],
-                                                        MiddleName = FullNameRec[2],
-                                                        IdAddress = RecCurrentAddress.Id,
-                                                    };
-                                                    AppData.Context.Organization.Add(RecCurrentOrganization);
-                                                    Properties.Settings.Default.IdRecOrg = RecCurrentOrganization.Id;
-                                                    AppData.Context.SaveChanges();
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show("Город указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                    RecCityTextBox.Focus();
-                                                }
-                                            }
-                                            else
-                                            {
-                                                MessageBox.Show("Область указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                                RecAreaTextBox.Focus();
-                                            }
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("Дата регистрации указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                            RecDateRegDatePicker.Focus();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("ОГРН указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                        RecOgrnTextBox.Focus();
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("ИНН указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                    RecInnTextBox.Focus();
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("E-Mail адрес указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                                RecEmailTextBox.Focus();
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Номер телефона указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                            RecPhoneNumberTextBox.Focus();
-                        }
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Фамилия указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        RecFIOTextBox.Focus();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Не все поля получателя заполнены!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
             //Добавление склада отправителя, если он отсутствует
             SenCurrentWarehouse = AppData.Context.Warehouse.Where(c => c.Address.Region.ToLower().Contains(SenWarAreaTextBox.Text.ToLower()) && c.Address.City.ToLower().Contains(SenWarCityTextBox.Text.ToLower()) && c.Address.Street.ToLower().Contains(SenWarStreetTextBox.Text.ToLower()) && c.Address.House.ToLower().Contains(SenWarHouseTextBox.Text.ToLower())).FirstOrDefault();
             if (SenCurrentWarehouse == null)
@@ -422,76 +333,52 @@ namespace Warehouse.Pages
                     MessageBox.Show("Область указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     RecWarAreaTextBox.Focus();
                 }
-            } else
-            {
-                //SenCurrentWarehouse.Organization = SenCurrentOrganization;
-                //Address SenWarCurrentAddress = AppData.Context.Address.Where(c => c.Region == SenWarAreaTextBox.Text && c.City == SenWarCityTextBox.Text && c.Street == SenWarStreetTextBox.Text && c.House == SenWarHouseTextBox.Text).FirstOrDefault();
-                //SenCurrentWarehouse.Address = SenWarCurrentAddress;
-            }
-
-            //Добавление склада отправителя, если он отсутствует
-            RecCurrentWarehouse = AppData.Context.Warehouse.Where(c => c.Address.Region.ToLower().Contains(RecWarAreaTextBox.Text.ToLower()) && c.Address.City.ToLower().Contains(RecWarCityTextBox.Text.ToLower()) && c.Address.Street.ToLower().Contains(RecWarStreetTextBox.Text.ToLower()) && c.Address.House.ToLower().Contains(RecWarHouseTextBox.Text.ToLower())).FirstOrDefault();
-            if (RecCurrentWarehouse == null)
-            {
-                string letterList = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnoprstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-                string numList = "1234567890";
-                if (RecWarAreaTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
-                {
-                    if (RecWarCityTextBox.Text.IndexOfAny(numList.ToCharArray()) <= -1)
-                    {
-                        Address RecWarCurrentAddress = new Address()
-                        {
-                            CodeCountry = "RU",
-                            Region = RecWarAreaTextBox.Text,
-                            City = RecWarCityTextBox.Text,
-                            Street = RecWarStreetTextBox.Text,
-                            House = RecWarHouseTextBox.Text,
-                        };
-                        AppData.Context.Address.Add(RecWarCurrentAddress);
-
-                        RecCurrentWarehouse = new Entities.Warehouse()
-                        {
-                            IdAddress = RecWarCurrentAddress.Id,
-                            IdOrganization = RecCurrentOrganization.Id,
-                        };
-                        AppData.Context.Warehouse.Add(RecCurrentWarehouse);
-                        Properties.Settings.Default.IdRecWar = RecCurrentWarehouse.Id;
-                        AppData.Context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Город указан некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        RecWarCityTextBox.Focus();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Область указана некорректно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    RecWarAreaTextBox.Focus();
-                }
-            }
-            else
-            {
-                //RecCurrentWarehouse.Organization = RecCurrentOrganization;
-                //Address RecWarCurrentAddress = AppData.Context.Address.Where(c => c.Region == RecWarAreaTextBox.Text && c.City == RecWarCityTextBox.Text && c.Street == RecWarStreetTextBox.Text && c.House == RecWarHouseTextBox.Text).FirstOrDefault();
-                //RecCurrentWarehouse.Address = RecWarCurrentAddress;
             }
 
             //Создание докумкнта
-            CurrentDocument.IdRecipient = RecCurrentOrganization.Id;
-            CurrentDocument.IdSener = SenCurrentOrganization.Id;
-            CurrentDocument.IdWarRecipient = RecCurrentWarehouse.Id;
-            CurrentDocument.IdWarSender = SenCurrentWarehouse.Id;
-            CurrentDocument.Date = DateTime.Today;
-            AppData.Context.SaveChanges();
+            if (RecTypeOrgComboBox.SelectedItem != null && !String.IsNullOrWhiteSpace(RecNameTextBox.Text) && RecDateRegDatePicker.SelectedDate != null && !String.IsNullOrWhiteSpace(RecPhoneNumberTextBox.Text) && !String.IsNullOrWhiteSpace(RecEmailTextBox.Text) && !String.IsNullOrWhiteSpace(RecInnTextBox.Text) && !String.IsNullOrWhiteSpace(RecOgrnTextBox.Text) && !String.IsNullOrWhiteSpace(RecFIOTextBox.Text) && !String.IsNullOrWhiteSpace(RecAreaTextBox.Text) && !String.IsNullOrWhiteSpace(RecCityTextBox.Text) && !String.IsNullOrWhiteSpace(RecStreetTextBox.Text) && !String.IsNullOrWhiteSpace(RecHouseTextBox.Text) && SenTypeOrgComboBox.SelectedItem != null && !String.IsNullOrWhiteSpace(SenNameTextBox.Text) && SenDateRegDatePicker.SelectedDate != null && !String.IsNullOrWhiteSpace(SenPhoneNumberTextBox.Text) && !String.IsNullOrWhiteSpace(SenEmailTextBox.Text) && !String.IsNullOrWhiteSpace(SenInnTextBox.Text) && !String.IsNullOrWhiteSpace(SenOgrnTextBox.Text) && !String.IsNullOrWhiteSpace(SenFIOTextBox.Text) && !String.IsNullOrWhiteSpace(SenAreaTextBox.Text) && !String.IsNullOrWhiteSpace(SenCityTextBox.Text) && !String.IsNullOrWhiteSpace(SenStreetTextBox.Text) && !String.IsNullOrWhiteSpace(SenHouseTextBox.Text) && !String.IsNullOrWhiteSpace(SenWarAreaTextBox.Text) && !String.IsNullOrWhiteSpace(SenWarCityTextBox.Text) && !String.IsNullOrWhiteSpace(SenWarStreetTextBox.Text) && !String.IsNullOrWhiteSpace(SenWarHouseTextBox.Text) && !String.IsNullOrWhiteSpace(RecWarAreaTextBox.Text) && !String.IsNullOrWhiteSpace(RecWarCityTextBox.Text) && !String.IsNullOrWhiteSpace(RecWarStreetTextBox.Text) && !String.IsNullOrWhiteSpace(RecWarHouseTextBox.Text))
+            {
+                CurrentDocument.IdRecipient = RecCurrentOrganization.Id;
+                CurrentDocument.IdSener = SenCurrentOrganization.Id;
+                CurrentDocument.IdWarRecipient = RecCurrentWarehouse.Id;
+                CurrentDocument.IdWarSender = SenCurrentWarehouse.Id;
+                CurrentDocument.Date = DateTime.Today;
+                AppData.Context.SaveChanges();
+
+
+            }
+            else
+            {
+                MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             if (CurrentDocument.IdRecipient == null && CurrentDocument.IdSener == null && CurrentDocument.IdWarRecipient == null && CurrentDocument.IdWarSender == null && CurrentDocument.Date == null)
             {
+                AppData.Context.DocumentGood.Remove(CurrentDocumentGood);
                 AppData.Context.Document.Remove(CurrentDocument);
                 AppData.Context.SaveChanges();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentGood CurrentGood = GoodsDataGrid.SelectedItem as DocumentGood;
+            if (CurrentGood != null)
+            {
+                if (MessageBox.Show("Вы действительно хотите удалить товар?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    AppData.Context.DocumentGood.Remove(CurrentGood);
+                    AppData.Context.SaveChanges();
+                    MessageBox.Show("Товар был удалён!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                    GoodsDataGrid.ItemsSource = AppData.Context.DocumentGood.Where(c => c.IdDocument == CurrentDocument.Id).ToList();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите товар!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

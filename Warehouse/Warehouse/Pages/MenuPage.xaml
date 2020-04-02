@@ -9,47 +9,29 @@
       Title="Главное меню">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="StaffButton"
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Button x:Name="StaffButton"
                         Margin="5"
                         Content="Сотрудники"
                         Click="StaffButton_Click" />
-                <Button x:Name="OrganizationButton" 
+                <Button x:Name="OrganizationButton"
                         Content="Организации"
                         Margin="5"
                         Click="OrganizationButton_Click" />
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="GoodsButton"
-                        Margin="5"
-                        Content="Товары"
-                        Click="GoodsButton_Click" />
-                <Button x:Name="ManufacturerButton"
-                        Content="Производители"
-                        Margin="5" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
                 <Button x:Name="WarehouseButton"
                         Margin="5"
                         Content="Склад"
                         Click="WarehouseButton_Click" />
-                <Button x:Name="DocumentButton"
-                        Content="Документы"
-                        Margin="5"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
                 <Button x:Name="ReceiptInvoiceButton"
                         Margin="5"
                         Content="Приходные накладные"
                         Click="ReceiptInvoiceButton_Click" />
                 <Button x:Name="ExpenceInvoiceButton"
                         Content="Расходные накладные"
-                        Margin="5" />
+                        Margin="5"
+                    Click="ExpenceInvoiceButton_Click" />
             </StackPanel>
-        </StackPanel>
     </Grid>
 </Page>

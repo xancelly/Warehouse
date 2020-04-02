@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Warehouse.Pages;
 
 namespace Warehouse.Pages
 {
@@ -42,12 +43,17 @@ namespace Warehouse.Pages
 
         private void WarehouseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new WarehousePage()); 
         }
 
         private void ReceiptInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditReceiptInvoicePage());
+            NavigationService.Navigate(new ReceiptInvoicePage());
+        }
+
+        private void ExpenceInvoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

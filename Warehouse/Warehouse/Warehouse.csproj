@@ -117,6 +117,7 @@
     <Compile Include="Entities\DocumentGood.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\DocumentGoodsPartial.cs" />
     <Compile Include="Entities\FullnameDirector.cs" />
     <Compile Include="Entities\FullnameStaffPartial.cs" />
     <Compile Include="Entities\Good.cs">
@@ -129,6 +130,9 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\NameManPartial.cs" />
+    <Compile Include="Entities\ReceiptDocumentOrgPartial.cs" />
+    <Compile Include="Entities\ReceiptWarPartial.cs" />
+    <Compile Include="Entities\SenderDocumentOrgPartial.cs" />
     <Compile Include="Entities\NameOrgPartial.cs" />
     <Compile Include="Entities\Organization.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -142,9 +146,11 @@
     <Compile Include="Entities\Role.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\SenderWarPartial.cs" />
     <Compile Include="Entities\Staff.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\TotalCostPartial.cs" />
     <Compile Include="Entities\TypeDocument.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -172,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EditReceiptInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ExpenceInvoicePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,6 +228,9 @@
     </Compile>
     <Compile Include="Pages\EditReceiptInvoicePage.xaml.cs">
       <DependentUpon>EditReceiptInvoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ExpenceInvoicePage.xaml.cs">
+      <DependentUpon>ExpenceInvoicePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReceiptInvoicePage.xaml.cs">
       <DependentUpon>ReceiptInvoicePage.xaml</DependentUpon>
