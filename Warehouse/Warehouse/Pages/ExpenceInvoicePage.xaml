@@ -6,9 +6,65 @@
       xmlns:local="clr-namespace:Warehouse.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
-      Title="ExpenceInvoicePage">
+      Title="Расходные накладные">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Поиск"
+                       Style="{StaticResource OtherTextBlock}" />
+            <TextBox x:Name="SearchTextBox" />
+
+        </StackPanel>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  x:Name="ExpenceInvoiceDataGrid"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ накладной"
+                                    Width="*"
+                                    Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Отправитель"
+                                    Width="*"
+                                    Binding="{Binding SenderOrg}" />
+                <DataGridTextColumn Header="Получатель"
+                                    Width="*"
+                                    Binding="{Binding ReceiptOrg}" />
+                <DataGridTextColumn Header="Откуда"
+                                    Width="*"
+                                    Binding="{Binding SenderWar}" />
+                <DataGridTextColumn Header="Куда"
+                                    Width="*"
+                                    Binding="{Binding ReceiptWar}" />
+                <DataGridTextColumn Header="Дата"
+                                    Width="*"
+                                    Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Общая сумма"
+                                    Width="*"
+                                    Binding="{Binding TotalCost}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddButton"
+                Content="Добавить"
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Grid.Row="2"
+                Click="AddButton_Click" />
+
+        <Button x:Name="DeleteButton"
+                Content="Удалить"
+                Margin="0,10,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Grid.Row="2"
+                Click="DeleteButton_Click" />
     </Grid>
 </Page>

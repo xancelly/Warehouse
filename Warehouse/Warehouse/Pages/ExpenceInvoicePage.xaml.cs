@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Warehouse.Entities;
 
 namespace Warehouse.Pages
 {
@@ -23,6 +24,17 @@ namespace Warehouse.Pages
         public ExpenceInvoicePage()
         {
             InitializeComponent();
+            ExpenceInvoiceDataGrid.ItemsSource = AppData.Context.Document.Where(c => c.IdTypeDocument == 2).ToList();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditExpenceInvoicePage());
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

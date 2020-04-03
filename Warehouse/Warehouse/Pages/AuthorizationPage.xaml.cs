@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using WpfMessageBoxLibrary;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -30,6 +31,7 @@ namespace Warehouse.Pages
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MenuPage());
+
         }
     }
 }

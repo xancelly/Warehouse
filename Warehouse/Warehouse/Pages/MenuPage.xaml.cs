@@ -53,7 +53,7 @@ namespace Warehouse.Pages
 
         private void ExpenceInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ExpenceInvoicePage());
         }
     }
 }

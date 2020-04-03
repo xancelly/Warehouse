@@ -139,9 +139,7 @@ namespace Warehouse.Pages
                                                                                     ImagePreview = StaffImage.DataContext as byte[],
                                                                                 };
                                                                                 AppData.Context.Staff.Add(CurrentStaff);
-                                                                                MessageBox.Show("Сотрудник успешно зарегистрирован!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                                                AppData.Context.SaveChanges();
-                                                                                NavigationService.GoBack();
+                                                                                NavigationService.Navigate(new Captcha());
                                                                             }
                                                                             else
                                                                             {
@@ -176,8 +174,7 @@ namespace Warehouse.Pages
                                                                             CurrentPassport.DateOfIssue = DateOfIssueDatePicker.SelectedDate;
                                                                             CurrentPassport.IssuedByWhom = IssuedByWhomTextBox.Text;
                                                                             MessageBox.Show("Информация обновлена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                                            AppData.Context.SaveChanges();
-                                                                            NavigationService.GoBack();
+                                                                            NavigationService.Navigate(new Captcha());
                                                                         }
                                                                     }
                                                                     else
