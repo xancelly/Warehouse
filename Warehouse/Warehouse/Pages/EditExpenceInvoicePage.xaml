@@ -422,7 +422,7 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Производитель"
                                                         Width="*"
-                                                        Binding="{Binding Good.NameMan}" />
+                                                        Binding="{Binding DocumentMan}" />
                                     <DataGridTextColumn Header="Наименование"
                                                         Width="*"
                                                         Binding="{Binding Good.Name}" />

@@ -377,6 +377,8 @@ namespace Warehouse.Pages
                 CurrentDocument.IdWarSender = SenCurrentWarehouse.Id;
                 CurrentDocument.Date = DateTime.Today;
                 AppData.Context.SaveChanges();
+                NavigationService.GoBack();
+                MessageBox.Show("Накладная успешно зарегистрирована!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

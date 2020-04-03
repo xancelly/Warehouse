@@ -133,6 +133,7 @@
     <Compile Include="Entities\Manufacturer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ManufacturerDocumentPartial.cs" />
     <Compile Include="Entities\NameManPartial.cs" />
     <Compile Include="Entities\ReceiptDocumentOrgPartial.cs" />
     <Compile Include="Entities\ReceiptWarPartial.cs" />
